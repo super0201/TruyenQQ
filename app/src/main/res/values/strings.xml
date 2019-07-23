@@ -1,6 +1,19 @@
 <resources>
     <string name="app_name">TruyenQQ</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_new">Home</string>
+    <string name="title_categories">Dashboard</string>
+    <string name="title_favorite">Notifications</string>
+    <string name="title_user">Notifications</string>
+
+    <string name="no_internet">Well...No Internet!</string>
+    <string name="notice">Cảm ơn bạn đã sử dụng App TruyenQQ! TruyenQQ luôn cập nhật cho các bạn những bộ truyện mới sớm nhất!</string>
+
+    //rate app
+    <string name="rate_1">Rate Cho Tao!</string>
+    <string name="rate_2">DM Rate App Cho Tao!!</string>
+    <string name="rate_yes">Sure!</string>
+    <string name="rate_no">Nope</string>
+    <string name="rate_later">Wait Me...</string>
+    <string name="exit_app">Bạn Muốn Thoát Ứng Dụng? </string>
+
 </resources>
