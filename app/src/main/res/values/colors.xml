@@ -9,5 +9,6 @@
     <color name="white">#fff</color>
 
     <color name="black65">#A6000000</color>
+    <color name="grey65">#A6A6A6</color>
     <color name="Search">#000</color>
 </resources>

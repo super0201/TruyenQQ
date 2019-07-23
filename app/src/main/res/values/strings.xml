@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">TruyenQQ</string>
-    <string name="title_new">Home</string>
-    <string name="title_categories">Dashboard</string>
-    <string name="title_favorite">Notifications</string>
-    <string name="title_user">Notifications</string>
+    <string name="title_new">New</string>
+    <string name="title_categories">Categories</string>
+    <string name="title_favorite">Bookmark</string>
+    <string name="title_user">User</string>
 
     <string name="no_internet">Well...No Internet!</string>
     <string name="notice">Cảm ơn bạn đã sử dụng App TruyenQQ! TruyenQQ luôn cập nhật cho các bạn những bộ truyện mới sớm nhất!</string>

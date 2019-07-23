@@ -11,7 +11,7 @@
         android:id="@+id/dot_progress_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_25sdp"
-        android:layout_marginTop="@dimen/_320sdp"
+        android:layout_marginTop="@dimen/_270sdp"
         custom:amount="4"
         custom:duration="@android:integer/config_mediumAnimTime"
         custom:endColor="@color/colorSilver"

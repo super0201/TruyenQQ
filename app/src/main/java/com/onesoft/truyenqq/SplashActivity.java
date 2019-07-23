@@ -88,7 +88,7 @@ public class SplashActivity extends Activity {
                         startActivity(i);
                         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                     } else {
-                        //if no internet connection -> you're sucks! I''l give you some toast for a warn
+                        //if there's no internet connection -> you're sucks! I'll give you some toast for a warn
                         LayoutInflater inflater = getLayoutInflater();
                         View layout = inflater.inflate(R.layout.custom_toast,
                                 (ViewGroup) findViewById(R.id.custom_toast_container));
@@ -104,6 +104,7 @@ public class SplashActivity extends Activity {
                         toast.setView(layout);
                         toast.show();
                     }
+
                 }
             }, SPLASH_DURATION);
         } else {

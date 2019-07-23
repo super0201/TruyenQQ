@@ -3,36 +3,82 @@ package com.onesoft.truyenqq;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.annotation.NonNull;
 import android.view.MenuItem;
-import android.widget.TextView;
 
+import com.github.silvestrpredko.dotprogressbar.DotProgressBarBuilder;
 import com.kobakei.ratethisapp.RateThisApp;
+import com.onesoft.truyenqq.fragment.FragmentCate;
+import com.onesoft.truyenqq.fragment.FragmentFav;
+import com.onesoft.truyenqq.fragment.FragmentNew;
+import com.onesoft.truyenqq.fragment.FragmentUser;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView mTextMessage;
+    private final int SPLASH_SURATION = 500; //0.5 seconds
+    Fragment fragment = null;
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        rateMe();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                new DotProgressBarBuilder(getBaseContext())
+                        .setAnimationTime(500)
+                        .build();
+
+                loadFragment(new FragmentNew());
+            }
+        }, SPLASH_SURATION);
+
+        BottomNavigationView navigation = findViewById(R.id.nav_view);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_new:
-                    return true;
+                    fragment = new FragmentNew();
+                    break;
+
                 case R.id.navigation_categories:
-                    return true;
+                    fragment = new FragmentCate();
+                    break;
+
                 case R.id.navigation_favorite:
-                    return true;
+                    fragment = new FragmentFav();
+                    break;
+
                 case R.id.navigation_user:
-                    return true;
+//                    dao = new FavDAO(getBaseContext());
+//                    list = dao.viewAll();
+//
+//                    if (list.size() == 0){
+//                        fragment = new FragmentNoFav();
+//                    } else {
+//                        fragment = new FragmentFavorite();
+//                    }
+                    fragment = new FragmentUser();
+
+                    break;
+
             }
-            return false;
+            return loadFragment(fragment);
         }
     };
 
@@ -70,14 +116,7 @@ public class MainActivity extends AppCompatActivity {
         RateThisApp.showRateDialogIfNeeded(this);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        mTextMessage = findViewById(R.id.message);
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
+
     @Override
     protected void onStart() {
         rateMe();
