@@ -27,7 +27,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class SplashActivity extends Activity {
     private final int REQUEST_PERMISSION = 1;
-    private static final int SPLASH_DURATION = 2800; // 2.8 seconds
+    private static final int SPLASH_DURATION = 3000; // 3 seconds
 
     //PLEASE DON'T TOUCH ANYTHING! THIS HAS BEEN OPTIMIZED FOR THE BEST RUN!
 
