@@ -46,7 +46,7 @@ public class SignupActivity extends AppCompatActivity {
                 "Please wait...", true);
         dialog.show();
 //
-//        String name = _name.getText().toString();
+//        String user = _user.getText().toString();
 //        String address = _addr.getText().toString();
 //        String email = _email.getText().toString();
 //        String phone = _phone.getText().toString();
@@ -72,12 +72,12 @@ public class SignupActivity extends AppCompatActivity {
 
 
     public void onSignupSuccess() {
-        String name = _user.getText().toString();
+        String user = _user.getText().toString();
         String pass = _pass.getText().toString();
         String email = _email.getText().toString();
         String re_pass = _re_pass.getText().toString();
 
-        Toast.makeText(getBaseContext(), "Đăng Kí Thành Công!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), "Signup Success!", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(getBaseContext(), MainActivity.class);
         startActivity(i);
 
@@ -87,80 +87,52 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Đăng Ký Thất Bại!", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Signup Failed!", Toast.LENGTH_LONG).show();
 
         _signup.setEnabled(true);
     }
 
     public boolean validate() {
         boolean valid = true;
-        String name = _name.getText().toString();
-        String address = _addr.getText().toString();
+        String user = _user.getText().toString();
+        String pass = _pass.getText().toString();
         String email = _email.getText().toString();
-        String id = _id.getText().toString();
+        String re_pass = _re_pass.getText().toString();
 
-//        if (name.isEmpty() || name.length() < 3) {
-//            _name.setError("Tên Phải Trên 3 Kí Tự!");
-//            valid = false;
-//        } else {
-//            _name.setError(null);
-//        }
-//
-//        if (address.isEmpty()) {
-//            _addressText.setError("Địa Chỉ Không Được Để Trống!");
-//            valid = false;
-//        } else {
-//            _addressText.setError(null);
-//        }
-//
-//        if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-//            _emailText.setError("Email Không Hợp Lệ!");
-//            valid = false;
-//        } else {
-//            _emailText.setError(null);
-//        }
-//
-//        if(userDAO.checkEmailExists(email) > 0){
-//            _emailText.setError("Đã Có Người Sử Dụng Email Này!");
-//            valid = false;
-//        } else {
-//            _emailText.setError(null);
-//        }
-//
-//        if (email.isEmpty()) {
-//            _emailText.setError("Email Không Được Để Trống!");
-//            valid = false;
-//        } else {
-//            _emailText.setError(null);
-//        }
-//
-//        if (phone.isEmpty() || phone.length() != 10) {
-//            _mobileText.setError("Không Được Để Trống Và Phải Trên 9 Kí Tự!");
-//            valid = false;
-//        } else {
-//            _mobileText.setError(null);
-//        }
-//
-//        if(userDAO.checkPhoneExists(phone) > 0){
-//            _mobileText.setError("SĐT Này Đã Được Sử Dụng!");
-//            valid = false;
-//        } else {
-//            _mobileText.setError(null);
-//        }
-//
-//        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-//            _passwordText.setError("Password Phải Từ 4 Hoặc 8 Kí Tự");
-//            valid = false;
-//        } else {
-//            _passwordText.setError(null);
-//        }
-//
-//        if (reEnterPassword.isEmpty() || reEnterPassword.length() < 4 || reEnterPassword.length() > 10 || !(reEnterPassword.equals(password))) {
-//            _reEnterPasswordText.setError("Password Không Giống!");
-//            valid = false;
-//        } else {
-//            _reEnterPasswordText.setError(null);
-//        }
+        if (user.isEmpty() || user.length() < 3) {
+            _user.setError("Tên Phải Trên 3 Kí Tự!");
+            valid = false;
+        } else {
+            _user.setError(null);
+        }
+
+        if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            _email.setError("Email Không Hợp Lệ!");
+            valid = false;
+        } else {
+            _email.setError(null);
+        }
+
+        if (email.isEmpty()) {
+            _email.setError("Email Không Được Để Trống!");
+            valid = false;
+        } else {
+            _email.setError(null);
+        }
+
+        if (pass.isEmpty() || pass.length() < 4 || pass.length() > 10) {
+            _pass.setError("Password Phải Từ 4 Hoặc 8 Kí Tự");
+            valid = false;
+        } else {
+            _pass.setError(null);
+        }
+
+        if (re_pass.isEmpty() || re_pass.length() < 4 || re_pass.length() > 10 || !(re_pass.equals(pass))) {
+            _re_pass.setError("Password Không Giống!");
+            valid = false;
+        } else {
+            _re_pass.setError(null);
+        }
         return valid;
     }
 
