@@ -3,6 +3,7 @@ package com.onesoft.truyenqq;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -10,10 +11,23 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import model.Responde;
+import network.NetworkAPI;
+import network.ServiceAPI;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
     private Button _signup;
-    private TextView _user, _email, _pass,_re_pass;
+    private TextView _user, _pass,_re_pass;
+    private NetworkAPI api;
 
 
     @Override
@@ -21,8 +35,11 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+        //register ServiceAPI and call getJSON from server
+        api = ServiceAPI.createService(NetworkAPI.class);
+
         _user = findViewById(R.id.inputUser);
-        _email = findViewById(R.id.inputEmail);
+//        _email = findViewById(R.id.inputEmail);
         _pass = findViewById(R.id.inputPass);
         _re_pass = findViewById(R.id.inputRePass);
         _signup = findViewById(R.id.btnSignUp);
@@ -33,7 +50,6 @@ public class SignupActivity extends AppCompatActivity {
                 signup();
             }
         });
-
     }
 
 
@@ -45,26 +61,25 @@ public class SignupActivity extends AppCompatActivity {
         final ProgressDialog dialog = ProgressDialog.show(SignupActivity.this, "Creating account!",
                 "Please wait...", true);
         dialog.show();
-//
-//        String user = _user.getText().toString();
-//        String address = _addr.getText().toString();
-//        String email = _email.getText().toString();
-//        String phone = _phone.getText().toString();
-//        String room = _room.getText().toString();
-//        String services = _services.getText().toString();
-//        String date = _date.getText().toString();
-//        String note = _note.getText().toString();
-//        String id = _id.getText().toString();
 
         // TODO: Implement your own signup logic here.
-
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
                         // On complete call either onSignupSuccess or onSignupFailed
                         // depending on success
-                        onSignupSuccess();
-                        // onSignupFailed();
+
+                        //validate input base on standard value
+                        validate();
+
+                        if(validate() == true){
+                            //run on SignupSuccess
+                            onSignupSuccess();
+                        } else {
+                            //run onSignupFailed
+                            onSignupFailed();
+                        }
+
                         dialog.dismiss();
                     }
                 }, 3000);
@@ -72,18 +87,37 @@ public class SignupActivity extends AppCompatActivity {
 
 
     public void onSignupSuccess() {
-        String user = _user.getText().toString();
-        String pass = _pass.getText().toString();
-        String email = _email.getText().toString();
-        String re_pass = _re_pass.getText().toString();
+        final String user = _user.getText().toString();
+        final String pass = _re_pass.getText().toString();
+        final String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Call <Responde> call = api.register(user, pass, date);
+                call.enqueue(new Callback<Responde>() {
+                    @Override
+                    public void onResponse(Call<Responde> call, Response<Responde> response) {
+                        if(response.isSuccessful()){
+                            Toast.makeText(getBaseContext(), "Signup Success!", Toast.LENGTH_SHORT);
+                        }else{
+//                    Log.e(TAG," Response Error "+ String.valueOf(response.code()));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Responde> call, Throwable t) {
+//                Log.e(TAG," Response Error "+ t.getMessage());
+                    }
+                });
+            }
+        });
 
         Toast.makeText(getBaseContext(), "Signup Success!", Toast.LENGTH_SHORT).show();
-        Intent i = new Intent(getBaseContext(), MainActivity.class);
-        startActivity(i);
+//        Intent i = new Intent(getBaseContext(), MainActivity.class);
+//        startActivity(i);
 
-        _signup.setEnabled(true);
         setResult(RESULT_OK, null);
-
     }
 
     public void onSignupFailed() {
@@ -96,39 +130,39 @@ public class SignupActivity extends AppCompatActivity {
         boolean valid = true;
         String user = _user.getText().toString();
         String pass = _pass.getText().toString();
-        String email = _email.getText().toString();
+//        String email = _email.getText().toString();
         String re_pass = _re_pass.getText().toString();
 
-        if (user.isEmpty() || user.length() < 3) {
-            _user.setError("Tên Phải Trên 3 Kí Tự!");
+        if (user.isEmpty()) {
+            _user.setError("Username can't be empty!");
             valid = false;
         } else {
             _user.setError(null);
         }
 
-        if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            _email.setError("Email Không Hợp Lệ!");
-            valid = false;
-        } else {
-            _email.setError(null);
-        }
-
-        if (email.isEmpty()) {
-            _email.setError("Email Không Được Để Trống!");
-            valid = false;
-        } else {
-            _email.setError(null);
-        }
+//        if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+//            _email.setError("Email not valid!");
+//            valid = false;
+//        } else {
+//            _email.setError(null);
+//        }
+//
+//        if (email.isEmpty()) {
+//            _email.setError("Email can't be empty!");
+//            valid = false;
+//        } else {
+//            _email.setError(null);
+//        }
 
         if (pass.isEmpty() || pass.length() < 4 || pass.length() > 10) {
-            _pass.setError("Password Phải Từ 4 Hoặc 8 Kí Tự");
+            _pass.setError("Password must be longer than 8 characters!");
             valid = false;
         } else {
             _pass.setError(null);
         }
 
         if (re_pass.isEmpty() || re_pass.length() < 4 || re_pass.length() > 10 || !(re_pass.equals(pass))) {
-            _re_pass.setError("Password Không Giống!");
+            _re_pass.setError("Re-enter password wrong!");
             valid = false;
         } else {
             _re_pass.setError(null);

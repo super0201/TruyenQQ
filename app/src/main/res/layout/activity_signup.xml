@@ -44,27 +44,27 @@
                 android:inputType="textPersonName" />
         </android.support.design.widget.TextInputLayout>
 
-        <!--  Email Label -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:theme="@style/AppTheme.Dark">
+        <!--&lt;!&ndash;  Email Label &ndash;&gt;-->
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="@dimen/_8sdp"-->
+            <!--android:layout_marginTop="@dimen/_8sdp"-->
+            <!--android:theme="@style/AppTheme.Dark">-->
 
-            <EditText
-                android:id="@+id/inputEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/uvn"
-                android:textColor="@color/white"
-                android:textColorHighlight="@color/white"
-                android:textColorLink="@color/white"
-                android:textColorHint="@color/white"
-                android:shadowColor="@color/white"
-                android:hint="Email"
-                android:inputType="textEmailAddress" />
-        </android.support.design.widget.TextInputLayout>
+            <!--<EditText-->
+                <!--android:id="@+id/inputEmail"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:fontFamily="@font/uvn"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textColorHighlight="@color/white"-->
+                <!--android:textColorLink="@color/white"-->
+                <!--android:textColorHint="@color/white"-->
+                <!--android:shadowColor="@color/white"-->
+                <!--android:hint="Email"-->
+                <!--android:inputType="textEmailAddress" />-->
+        <!--</android.support.design.widget.TextInputLayout>-->
 
         <!-- Password Label -->
         <android.support.design.widget.TextInputLayout
@@ -116,7 +116,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_24sdp"
-            android:layout_marginBottom="@dimen/_50sdp"
+            android:layout_marginBottom="@dimen/_80sdp"
             android:padding="@dimen/_12sdp"
             android:fontFamily="@font/uvn"
             android:textStyle="bold"

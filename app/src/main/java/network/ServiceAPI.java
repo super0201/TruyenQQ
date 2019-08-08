@@ -16,7 +16,7 @@ public class ServiceAPI {
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mangahay.net/wallpaper/webservices/")
+                .baseUrl("https://mangahay.net/manga/api_for_user/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient).build();
 
