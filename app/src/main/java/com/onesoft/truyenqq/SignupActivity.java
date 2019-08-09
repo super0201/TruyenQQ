@@ -1,20 +1,25 @@
 package com.onesoft.truyenqq;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
-import model.User;
+import model.ServerResponse;
 import network.NetworkAPI;
 import network.ServiceAPI;
 import retrofit2.Call;
@@ -90,32 +95,59 @@ public class SignupActivity extends AppCompatActivity {
         final String name = _name.getText().toString();
         final String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                Call<List<model.Response>> call = api.register(user, pass, name, date);
-//                call.enqueue(new Callback<List<Response>>() {
-//                    @Override
-//                    public void onResponse(Call<List<Response>> call, Response<List<Response>> response) {
-//                        Toast.makeText(getBaseContext(), response.message(), Toa)
-////                        if(response.isSuccessful()){
-////                            list.addAll(response.body());
-////                            mAdapter.notifyDataChanged();
-////                        }else{
-//////                    Log.e(TAG," Response Error "+ String.valueOf(response.code()));
-////                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<List<Response>> call, Throwable t) {
-////                Log.e(TAG," Response Error "+ t.getMessage());
-//                    }
-//                });
-//            }
-//        });
-////        Toast.makeText(getBaseContext(), "Signup Success!", Toast.LENGTH_SHORT).show();
-////        Intent i = new Intent(getBaseContext(), MainActivity.class);
-////        startActivity(i);
+        Call<ServerResponse> call = api.register(user, pass, name, date);
+        call.enqueue(new Callback<ServerResponse>() {
+            @SuppressLint("ResourceType")
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                Toast.makeText(getBaseContext(), response.message(), Toast.LENGTH_SHORT);
+                    if(response.body().getResult() == 1){
+                        LayoutInflater inflater = getLayoutInflater();
+                        View layout = inflater.inflate(R.layout.custom_toast,
+                                (ViewGroup) findViewById(R.id.custom_toast_container));
+
+                        TextView text = layout.findViewById(R.id.text);
+                        ImageView img = layout.findViewById(R.id.imgToast);
+                        img.setImageResource(R.raw.thumbs_up);
+                        text.setText(R.string.reg_success);
+
+                        Toast toast = new Toast(getApplicationContext());
+                        toast.setGravity(Gravity.BOTTOM, 0, 60);
+                        toast.setDuration(Toast.LENGTH_SHORT);
+                        toast.setView(layout);
+                        toast.show();
+
+                        Intent i = new Intent(getBaseContext(), LoginActivity.class);
+                        startActivity(i);
+
+                    } else {
+                        LayoutInflater inflater = getLayoutInflater();
+                        View layout = inflater.inflate(R.layout.custom_toast,
+                                (ViewGroup) findViewById(R.id.custom_toast_container));
+
+                        TextView text = layout.findViewById(R.id.text);
+                        ImageView img = layout.findViewById(R.id.imgToast);
+                        img.setImageResource(R.raw.no_internet);
+                        text.setText(R.string.reg_failed);
+
+                        Toast toast = new Toast(getApplicationContext());
+                        toast.setGravity(Gravity.BOTTOM, 0, 60);
+                        toast.setDuration(Toast.LENGTH_SHORT);
+                        toast.setView(layout);
+                        toast.show();
+
+                        Intent i = new Intent(getBaseContext(), LoginActivity.class);
+                        startActivity(i);
+
+                        Log.e(TAG," Response Error "+ response.code());
+                    }
+            }
+
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                Log.e(TAG," Response Error "+ t.getMessage());
+            }
+        });
 
         setResult(RESULT_OK, null);
     }

@@ -1,16 +1,22 @@
 package com.onesoft.truyenqq;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import model.ServerResponse;
@@ -113,16 +119,46 @@ public class LoginActivity extends AppCompatActivity {
 
         Call<ServerResponse> call = api.checkLogin(user, pass);
         call.enqueue(new Callback<ServerResponse>() {
+            @SuppressLint("ResourceType")
             @Override
             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                Toast.makeText(getBaseContext(), response.message(), Toast.LENGTH_SHORT);
                 if(response.body().getResult() == 1){
-                    Toast.makeText(getBaseContext(), "Login Lookin Good!", Toast.LENGTH_SHORT).show();
+                    LayoutInflater inflater = getLayoutInflater();
+                    View layout = inflater.inflate(R.layout.custom_toast,
+                            (ViewGroup) findViewById(R.id.custom_toast_container));
+
+                    TextView text = layout.findViewById(R.id.text);
+                    ImageView img = layout.findViewById(R.id.imgToast);
+                    img.setImageResource(R.raw.thumbs_up);
+                    text.setText(R.string.login_success);
+
+                    Toast toast = new Toast(getApplicationContext());
+                    toast.setGravity(Gravity.BOTTOM, 0, 60);
+                    toast.setDuration(Toast.LENGTH_SHORT);
+                    toast.setView(layout);
+                    toast.show();
 
                     Intent i = new Intent(getBaseContext(), MainActivity.class);
                     startActivity(i);
+
                 } else {
-                    Toast.makeText(getBaseContext(), "You should get it done right mate!", Toast.LENGTH_SHORT).show();
+                    LayoutInflater inflater = getLayoutInflater();
+                    View layout = inflater.inflate(R.layout.custom_toast,
+                            (ViewGroup) findViewById(R.id.custom_toast_container));
+
+                    TextView text = layout.findViewById(R.id.text);
+                    ImageView img = layout.findViewById(R.id.imgToast);
+                    img.setImageResource(R.raw.no_internet);
+                    text.setText(R.string.login_failed);
+
+                    Toast toast = new Toast(getApplicationContext());
+                    toast.setGravity(Gravity.BOTTOM, 0, 60);
+                    toast.setDuration(Toast.LENGTH_SHORT);
+                    toast.setView(layout);
+                    toast.show();
+
+                    Intent i = new Intent(getBaseContext(), LoginActivity.class);
+                    startActivity(i);
                     Log.e(TAG," Response Error " + response.code());
                 }
             }

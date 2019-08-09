@@ -16,4 +16,10 @@
     <string name="rate_later">Wait Me...</string>
     <string name="exit_app">Bạn Muốn Thoát Ứng Dụng? </string>
 
+    //login
+    <string name="login_success">Vào rồi kìa, ghê chưa!</string>
+    <string name="login_failed">Úi giời, login gì tầm này!</string>
+    //register
+    <string name="reg_success">Chồi ôi, register được luôn kìa! Ghê hôn</string>
+    <string name="reg_failed">Số bạn nhọ quá!</string>
 </resources>
