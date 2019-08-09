@@ -24,11 +24,11 @@ public class SessionManager {
     // All Shared Preferences Keys
     private static final String IS_LOGIN = "IsLoggedIn";
 
-    // User name (make variable public to access from outside)
+    // password (make variable public to access from outside)
     public static final String KEY_PASS = "pass";
 
-    // Email address (make variable public to access from outside)
-    public static final String KEY_EMAIL = "email";
+    // username (make variable public to access from outside)
+    public static final String KEY_USER = "user";
     private static SessionManager instance;
 
     // Constructor
@@ -40,15 +40,15 @@ public class SessionManager {
 
     //Create login session
 
-    public void createLoginSession(String pass, String email){
+    public void createLoginSession(String pass, String user){
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
 
-        // Storing user in pref
+        // Storing pass in pref
         editor.putString(KEY_PASS, pass);
 
-        // Storing email in pref
-        editor.putString(KEY_EMAIL, email);
+        // Storing username in pref
+        editor.putString(KEY_USER, user);
 
         // commit changes
         editor.commit();
@@ -80,7 +80,7 @@ public class SessionManager {
         user.put(KEY_PASS, pref.getString(KEY_PASS, null));
 
         // user email id
-        user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
+        user.put(KEY_USER, pref.getString(KEY_USER, null));
 
         // return user
         return user;

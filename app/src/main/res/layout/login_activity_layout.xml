@@ -6,7 +6,7 @@
     android:fitsSystemWindows="true">
 
     <LinearLayout
-        android:background="@color/white"
+        android:background="@color/colorPrimary"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,18 +26,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:theme="@style/AppTheme.Dark">
 
             <EditText
-                android:id="@+id/etEmail"
+                android:id="@+id/etUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="Username"
                 android:fontFamily="@font/uvn"
                 android:inputType="text"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black" />
+                android:textColor="@color/white"
+                android:textColorLink="@color/white"
+                android:textColorHighlight="@color/white"
+                android:textColorHint="@color/white"  />
         </android.support.design.widget.TextInputLayout>
 
         <!--  Password Label -->
@@ -56,8 +58,10 @@
                 android:hint="Password"
                 android:fontFamily="@font/uvn"
                 android:inputType="textPassword"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black" />
+                android:textColor="@color/white"
+                android:textColorLink="@color/white"
+                android:textColorHighlight="@color/white"
+                android:textColorHint="@color/white" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -68,10 +72,10 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_weight="1"
             android:textSize="@dimen/_12sdp"
-            android:text="Lưu Tài Khoản"
+            android:text="Remember Me"
             android:fontFamily="@font/uvn"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:theme="@style/AppTheme.Dark" />
 
         <android.support.v7.widget.AppCompatButton
@@ -81,23 +85,25 @@
             android:layout_marginTop="@dimen/_35sdp"
             android:padding="@dimen/_12sdp"
             android:textSize="@dimen/_12sdp"
-            android:text="Đăng Nhập"
+            android:text="Login"
             android:textStyle="bold"
             android:fontFamily="@font/uvn"
+            android:textColor="@color/black"
             android:theme="@style/AppTheme.Dark" />
 
 
-        <!--<android.support.v7.widget.AppCompatButton-->
-            <!--android:id="@+id/btnSignUp"-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="@dimen/_5sdp"-->
-            <!--android:padding="@dimen/_12sdp"-->
-            <!--android:textSize="@dimen/_12sdp"-->
-            <!--android:fontFamily="@font/uvn"-->
-            <!--android:textStyle="bold"-->
-            <!--android:text="Chưa Có Tài Khoản?"-->
-            <!--android:theme="@style/AppTheme.Dark" />-->
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnSignUp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:padding="@dimen/_12sdp"
+            android:textSize="@dimen/_12sdp"
+            android:fontFamily="@font/uvn"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="Register An Account?"
+            android:theme="@style/AppTheme.Dark" />
 
     </LinearLayout>
 

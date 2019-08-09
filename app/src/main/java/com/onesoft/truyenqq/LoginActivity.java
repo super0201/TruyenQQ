@@ -5,12 +5,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import model.ServerResponse;
+import network.NetworkAPI;
+import network.ServiceAPI;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import session.SessionManager;
 
 public class LoginActivity extends AppCompatActivity {
@@ -18,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText etUser, etPass;
     Button btnLogin, btnSignUp;
     CheckBox ckbRemember;
+    private NetworkAPI api;
     SessionManager session;
 
     @Override
@@ -25,17 +34,30 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity_layout);
 
-        btnLogin = (Button) findViewById(R.id.btnLogin);
-        etUser = (EditText) findViewById(R.id.etEmail);
-        etPass = (EditText) findViewById(R.id.etPass);
-        ckbRemember = (CheckBox) findViewById(R.id.ckbRemember);
-//        btnSignUp = (Button) findViewById(R.id.btnSignUp);
+        //register ServiceAPI and call getJSON from server
+        api = ServiceAPI.createService(NetworkAPI.class);
 
-        //extract data from input and Session
-        final String user = etUser.getText().toString();
-        final String pass = etPass.getText().toString();
+        btnLogin = findViewById(R.id.btnLogin);
+        etUser = findViewById(R.id.etUser);
+        etPass = findViewById(R.id.etPass);
+        ckbRemember = findViewById(R.id.ckbRemember);
+        btnSignUp = findViewById(R.id.btnSignUp);
 
-        session = new SessionManager(this);
+        ckbRemember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                String user = etUser.getText().toString();
+                String pass = etPass.getText().toString();
+
+                if (buttonView.isChecked()) {
+                    session.createLoginSession(pass, user);
+                }
+                else
+                {
+                    // not checked
+                }
+            }
+        });
 
         //button clickListener
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -46,19 +68,19 @@ public class LoginActivity extends AppCompatActivity {
 
         });
 
-//        btnSignUp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getBaseContext(), SignupActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-        
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), SignupActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void login(){
         final ProgressDialog dialog = ProgressDialog.show(LoginActivity.this, "Authenticating",
-                "Vui Lòng Chờ!", true);
+                "Wait a bit mate!", true);
         dialog.show();
 
 
@@ -86,47 +108,58 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginSuccess() {
-        session.createLoginSession("pass", "user");
-        Intent i = new Intent(getBaseContext(), MainActivity.class);
-        startActivity(i);
-        Toast.makeText(getBaseContext(), "Đăng Nhập Thành Công!", Toast.LENGTH_SHORT).show();
+        final String user = etUser.getText().toString();
+        final String pass = etPass.getText().toString();
+
+        Call<ServerResponse> call = api.checkLogin(user, pass);
+        call.enqueue(new Callback<ServerResponse>() {
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                Toast.makeText(getBaseContext(), response.message(), Toast.LENGTH_SHORT);
+                if(response.body().getResult() == 1){
+                    Toast.makeText(getBaseContext(), "Login Lookin Good!", Toast.LENGTH_SHORT).show();
+
+                    Intent i = new Intent(getBaseContext(), MainActivity.class);
+                    startActivity(i);
+                } else {
+                    Toast.makeText(getBaseContext(), "You should get it done right mate!", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG," Response Error " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                Log.e(TAG," Response Error "+ t.getMessage());
+            }
+        });
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Username Hoặc Password Không Đúng!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), "Username Or Password Isn't Correct!", Toast.LENGTH_SHORT).show();
         btnLogin.setEnabled(true);
     }
 
     public boolean validate() {
         boolean valid = true;
 
-        String email = etUser.getText().toString();
+        String user = etUser.getText().toString();
         String password = etPass.getText().toString();
 
-        if (email.isEmpty()|| !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            etUser.setError("Email Không Đúng Hoặc Để Trống!");
+        if (user.isEmpty()) {
+            etUser.setError("User can't be empty!");
             valid = false;
         }
         if (password.isEmpty() || password.length() < 8) {
-            etPass.setError("Password Phải Từ 8 Kí Tự Trở Lên!");
+            etPass.setError("Password must from 8 characters!");
             valid = false;
-        }
-//        if (userDAO.checkLoginStat(email, password) < 0) {
-//            etUser.setError("Email Không Đúng!");
-//            etPass.setError("Password Không Đúng!");
-//            valid = false;
-//        }
-        else {
-            etUser.setError(null);
-            etPass.setError(null);
         }
         return valid;
     }
 
     @Override
     public void onBackPressed() {
-//        Intent intent = new Intent(getBaseContext(), MainActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(intent);
         finish();
         super.onBackPressed();
     }

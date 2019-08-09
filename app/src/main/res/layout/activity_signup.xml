@@ -40,8 +40,29 @@
                 android:textColorHint="@color/white"
                 android:shadowColor="@color/white"
                 android:fontFamily="@font/uvn"
-                android:hint="Username"
-                android:inputType="textPersonName" />
+                android:hint="Your Username?"
+                android:inputType="text" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:theme="@style/AppTheme.Dark">
+
+            <EditText
+                android:id="@+id/inputName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textColorHighlight="@color/white"
+                android:textColorLink="@color/white"
+                android:textColorHint="@color/white"
+                android:shadowColor="@color/white"
+                android:fontFamily="@font/uvn"
+                android:hint="What Should I Call You?"
+                android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
 
         <!--&lt;!&ndash;  Email Label &ndash;&gt;-->
@@ -84,7 +105,7 @@
                 android:textColorLink="@color/white"
                 android:textColorHint="@color/white"
                 android:shadowColor="@color/white"
-                android:hint="Password"
+                android:hint="Can I See Your Password?"
                 android:inputType="textPassword" />
         </android.support.design.widget.TextInputLayout>
 
@@ -101,7 +122,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/uvn"
-                android:hint="Re-enter Password"
+                android:hint="Please Let Me See Your Password"
                 android:inputType="textPassword"
                 android:shadowColor="@color/white"
                 android:textColor="@color/white"
