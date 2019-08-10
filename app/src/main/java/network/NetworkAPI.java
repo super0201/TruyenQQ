@@ -16,6 +16,7 @@ public interface NetworkAPI {
     Call<ServerResponse> checkLogin(@Query("user") String user,
                                     @Query("pass") String pass);
 
+<<<<<<< Updated upstream
     @GET("api_get_comic.php")
     Call<ListManga> getDataComic();
 //
@@ -24,4 +25,10 @@ public interface NetworkAPI {
 //
 //    @GET("API_search.php")
 //    Call<List<ModelSearch>> getSearch(@Query("index") int index, @Query("input") String input);
+=======
+
+    @GET("api_get_comic.php")
+    Call<ListManga> getDataComic();
+
+>>>>>>> Stashed changes
 }

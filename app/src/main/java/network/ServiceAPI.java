@@ -6,11 +6,18 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+<<<<<<< Updated upstream
 import static utils.Constants.ROOT_URL;
 import static utils.Constants.URL_FOLDER;
 
 public class ServiceAPI {
 
+=======
+import static utils.Constant.ROOT_URL;
+import static utils.Constant.URL_FOLDER;
+
+public class ServiceAPI {
+>>>>>>> Stashed changes
     public static String GET_DATA_COMIC = ROOT_URL + URL_FOLDER ;
 
     public static <S> S createService(Class<S> serviceClass) {

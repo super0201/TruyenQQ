@@ -1,12 +1,22 @@
 package com.onesoft.truyenqq.fragment;
 
 import android.app.ProgressDialog;
+<<<<<<< Updated upstream
+=======
+import android.content.Context;
+import android.graphics.Bitmap;
+>>>>>>> Stashed changes
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+<<<<<<< Updated upstream
+=======
+import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
+>>>>>>> Stashed changes
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +31,10 @@ import com.onesoft.truyenqq.adapter.MyAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+<<<<<<< Updated upstream
+=======
+import java.util.zip.Inflater;
+>>>>>>> Stashed changes
 
 import model.ListManga;
 import model.Manga;
