@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:drawable/editbox_background_normal"
+    android:padding="4dp">
+
+    <ImageView
+        android:id="@+id/ivManga"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:src="@mipmap/ic_launcher" />
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivManga"
+        android:gravity="center"
+        android:text="Title Light Novel"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:background="@android:drawable/screen_background_dark_transparent"
+        android:textColor="#fff"
+        android:layout_marginTop="-33dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_below="@id/ivManga"
+        android:layout_margin="@dimen/_4sdp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivManga"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/_4sdp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category: " />
+            <TextView
+                android:id="@+id/tvCate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="sdasf "
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/_4sdp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date: "/>
+            <TextView
+                android:id="@+id/tvDateAdd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="adđ "
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/_4sdp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

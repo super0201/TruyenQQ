@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <ListView
+        android:id="@+id/lvManga"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"
-        android:src="@raw/no_internet"
-        tools:ignore="MissingConstraints" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="This Is New!"
-        android:textAlignment="center"
-        android:fontFamily="@font/uvn"
-        android:textSize="@dimen/_40sdp"
-        tools:ignore="MissingConstraints" />
+    </ListView>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

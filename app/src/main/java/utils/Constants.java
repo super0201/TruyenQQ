@@ -17,4 +17,9 @@ public class Constants {
     //
     public static final String RESET_PASSWORD_INITIATE = "resPassReq";
     public static final String RESET_PASSWORD_FINISH = "resPass";
+
+    public static String ROOT_URL = "https://mangahay.net/manga/";
+
+    //.. API FOR COMIC
+    public static String URL_FOLDER = "api_for_comic/";
 }
