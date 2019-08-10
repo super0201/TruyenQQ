@@ -2,8 +2,11 @@ package com.onesoft.truyenqq;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -65,16 +68,13 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.navigation_user:
-//                    dao = new FavDAO(getBaseContext());
-//                    list = dao.viewAll();
-//
-//                    if (list.size() == 0){
-//                        fragment = new FragmentNoFav();
-//                    } else {
-//                        fragment = new FragmentFavorite();
-//                    }
-                    fragment = new FragmentUser();
-
+                    final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                    if(!prefs.contains("isLoggedIn")){
+                        Intent i = new Intent(getBaseContext(), LoginActivity.class);
+                        startActivity(i);
+                    } else {
+                        fragment = new FragmentUser();
+                    }
                     break;
 
             }

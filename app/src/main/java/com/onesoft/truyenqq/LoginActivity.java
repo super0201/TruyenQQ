@@ -3,8 +3,10 @@ package com.onesoft.truyenqq;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -33,12 +35,13 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin, btnSignUp;
     CheckBox ckbRemember;
     private NetworkAPI api;
-    SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity_layout);
+
+
 
         //register ServiceAPI and call getJSON from server
         api = ServiceAPI.createService(NetworkAPI.class);
@@ -56,11 +59,13 @@ public class LoginActivity extends AppCompatActivity {
                 String pass = etPass.getText().toString();
 
                 if (buttonView.isChecked()) {
-                    session.createLoginSession(pass, user);
-                }
-                else
-                {
-                    // not checked
+                    final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                    //write in sharedpref
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putBoolean("isLoggedIn", true);
+                    editor.putString("user", user);
+                    editor.putString("pass", pass);
+                    editor.commit();
                 }
             }
         });
@@ -137,6 +142,14 @@ public class LoginActivity extends AppCompatActivity {
                     toast.setDuration(Toast.LENGTH_SHORT);
                     toast.setView(layout);
                     toast.show();
+
+                    //write in sharedpref
+                    final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putBoolean("isLoggedIn", true);
+                    editor.putString("user", user);
+                    editor.putString("pass", pass);
+                    editor.commit();
 
                     Intent i = new Intent(getBaseContext(), MainActivity.class);
                     startActivity(i);
