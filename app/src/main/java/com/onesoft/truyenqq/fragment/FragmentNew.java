@@ -73,38 +73,48 @@ public class FragmentNew extends Fragment {
                     .setAnimationDirection(DotProgressBar.LEFT_DIRECTION)
                     .build();
 
-            //Creating an object of our api interface
-            NetworkAPI api = ServiceAPI.getDataComic();
-            // Calling JSON
-            Call<ListManga> call = api.getDataComic();
-
-            // Enqueue Callback will be call when get response...
-            call.enqueue(new Callback<ListManga>() {
+            //This is how you create thread in a fragment - high loading speed baby!
+            getActivity().runOnUiThread(new Runnable() {
                 @Override
+                public void run() {
 
-                public void onResponse(Call<ListManga> call, Response<ListManga> response)
-                {
-                    //Dismiss Dialog
+                    //Creating an object of our api interface
+                    NetworkAPI api = ServiceAPI.getDataComic();
+
+                    // Calling JSON
+                    Call<ListManga> call = api.getDataComic();
+
+                    // Enqueue Callback will be call when get response...
+                    call.enqueue(new Callback<ListManga>() {
+                        @Override
+
+                        public void onResponse(Call<ListManga> call, Response<ListManga> response)
+                        {
+                            //Dismiss Dialog
 //                    dialog.dismiss();
 
-                    if(response.isSuccessful()) {
-                        // Got Successfully
-                        mangaArrayList = response.body().getMangas();
-                        // Binding that List to Adapter
-                        adapter = new MyAdapter(getContext(), mangaArrayList);
-                        lvManga.setAdapter(adapter);
-                    } else {
-                        Snackbar.make(parentLayout, "There is something wrong...hmm?!", Snackbar.LENGTH_LONG).show();
-                    }
-                }
-                @Override
-                public void onFailure(Call<ListManga> call, Throwable t) {
+                            if(response.isSuccessful()) {
+
+                                // Got Successfully
+                                mangaArrayList = response.body().getMangas();
+
+                                // Binding that List to Adapter
+                                adapter = new MyAdapter(getContext(), mangaArrayList);
+                                lvManga.setAdapter(adapter);
+
+                            } else {
+
+                                Snackbar.make(parentLayout, "There is something wrong...hmm?!", Snackbar.LENGTH_LONG).show();
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<ListManga> call, Throwable t) {
 //                    dialog.dismiss();
+                        }
+                    });
                 }
             });
-        }else{
-            Snackbar.make(parentLayout,"FAIL", Snackbar.LENGTH_LONG).show();
-        }
+
 
         lvManga.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @SuppressLint("ResourceType")
@@ -160,13 +170,13 @@ public class FragmentNew extends Fragment {
                 }
             }
         } );
-    }
+    }}}
+//
+//    public void ShowDialog(View view){
+//
+//
+//
+//
+//
+//    }
 
-    public void ShowDialog(View view){
-
-
-
-
-
-    }
-}

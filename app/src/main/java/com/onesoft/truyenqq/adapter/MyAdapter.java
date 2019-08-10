@@ -50,10 +50,10 @@ public class MyAdapter extends ArrayAdapter<Manga> {
         }
 
         public static ViewHolder create(RelativeLayout rootView) {
-            ImageView imageView = (ImageView) rootView.findViewById( R.id.ivManga );
-            TextView tvName = (TextView) rootView.findViewById( R.id.tvName );
-            TextView tvCate = (TextView) rootView.findViewById( R.id.tvCate );
-            TextView tvDate = (TextView) rootView.findViewById( R.id.tvDateAdd );
+            ImageView imageView = rootView.findViewById( R.id.ivManga );
+            TextView tvName = rootView.findViewById( R.id.tvName );
+            TextView tvCate = rootView.findViewById( R.id.tvCate );
+            TextView tvDate = rootView.findViewById( R.id.tvDateAdd );
 
             return new ViewHolder(rootView, imageView, tvName, tvCate,tvDate);
         }
