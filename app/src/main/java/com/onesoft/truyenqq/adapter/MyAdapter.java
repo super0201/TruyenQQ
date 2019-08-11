@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.onesoft.truyenqq.R;
 import com.squareup.picasso.Picasso;
 
@@ -75,8 +76,13 @@ public class MyAdapter extends ArrayAdapter<Manga> {
         vh.tvDate.setText( item.getDate_add() );
 
 
-        Picasso.with( context ).load( item.getThumb() ).placeholder( R.mipmap.ic_launcher ).error( R.mipmap.ic_launcher ).into( vh.imageView );
+//        Picasso.with( context ).load( item.getThumb() ).placeholder( R.mipmap.ic_launcher ).error( R.mipmap.ic_launcher ).into( vh.imageView );
+
+//.. LOADING ..//
+        Glide.with( context ).load( item.getThumb() ).placeholder( R.mipmap.ic_launcher ).into( vh.imageView );
+
         return vh.rootView;
+
     }
 
 }

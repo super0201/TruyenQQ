@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:background="@color/grey65"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/reLayout">
 
-    <ListView
-        android:id="@+id/lvManga"
+    <!--<ListView-->
+        <!--android:id="@+id/lvManga"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+    <!--</ListView>-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvManga"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </ListView>
 
-</LinearLayout>
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>
