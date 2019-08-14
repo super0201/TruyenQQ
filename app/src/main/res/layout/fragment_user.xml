@@ -38,8 +38,7 @@
                 android:layout_marginTop="@dimen/_15sdp"
                 android:textSize="@dimen/_15sdp"
                 android:fontFamily="@font/uvn"
-                android:textColor="@color/white"
-                android:text="Hotel Xin Chào! Saquadikhap!"/>
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/tvRole"
@@ -47,9 +46,9 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_10sdp"
                 android:fontFamily="@font/uvn"
-                android:textColor="@color/white"
-                android:text="App Được Viết Bởi Team OneSoft!"/>
+                android:textColor="@color/white" />
         </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout

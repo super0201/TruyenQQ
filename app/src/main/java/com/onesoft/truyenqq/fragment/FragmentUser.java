@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.onesoft.truyenqq.R;
 
 import java.util.ArrayList;
@@ -92,7 +93,8 @@ public class FragmentUser extends Fragment {
                                     .apply(centerCropTransform()
                                             .placeholder(R.raw.loading)
                                             .error(R.raw.error)
-                                            .priority(Priority.HIGH))
+                                            .priority(Priority.HIGH)
+                                            .diskCacheStrategy(DiskCacheStrategy.ALL))
                                     .transition(withCrossFade())
                                     .thumbnail(0.1f)
                                     .into(imvProfile);

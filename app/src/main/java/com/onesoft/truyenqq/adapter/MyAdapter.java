@@ -1,5 +1,6 @@
 package com.onesoft.truyenqq.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.onesoft.truyenqq.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import model.Manga;
+
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
+import static com.bumptech.glide.request.RequestOptions.centerCropTransform;
 
 public class MyAdapter extends ArrayAdapter<Manga> {
 
@@ -59,6 +65,7 @@ public class MyAdapter extends ArrayAdapter<Manga> {
             return new ViewHolder(rootView, imageView, tvName, tvCate,tvDate);
         }
     }
+    @SuppressLint("ResourceType")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final ViewHolder vh;
@@ -70,16 +77,21 @@ public class MyAdapter extends ArrayAdapter<Manga> {
             vh = (ViewHolder) convertView.getTag();
         }
 
-        Manga item = getItem( position );
-        vh.tvName.setText( item.getName() );
-        vh.tvCate.setText( item.getCategory() );
-        vh.tvDate.setText( item.getDate_add() );
-
-
-//        Picasso.with( context ).load( item.getThumb() ).placeholder( R.mipmap.ic_launcher ).error( R.mipmap.ic_launcher ).into( vh.imageView );
-
-//.. LOADING ..//
-        Glide.with( context ).load( item.getThumb() ).placeholder( R.mipmap.ic_launcher ).into( vh.imageView );
+        Manga item = getItem(position);
+        vh.tvName.setText(item.getName());
+        vh.tvCate.setText(item.getCategory());
+        vh.tvDate.setText(item.getDate_add());
+        
+        //.. LOADING ..//
+        Glide.with(getContext()).load(item.getThumb())
+                .apply(centerCropTransform()
+                        .placeholder(R.raw.loading)
+                        .error(R.raw.error)
+                        .priority(Priority.HIGH)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL))
+                .transition(withCrossFade())
+                .thumbnail(0.1f)
+                .into(vh.imageView);
 
         return vh.rootView;
 
