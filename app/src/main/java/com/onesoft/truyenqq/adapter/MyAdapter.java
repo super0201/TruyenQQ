@@ -81,13 +81,15 @@ public class MyAdapter extends ArrayAdapter<Manga> {
         vh.tvName.setText(item.getName());
         vh.tvCate.setText(item.getCategory());
         vh.tvDate.setText(item.getDate_add());
-        
+
         //.. LOADING ..//
         Glide.with(getContext()).load(item.getThumb())
                 .apply(centerCropTransform()
                         .placeholder(R.raw.loading)
                         .error(R.raw.error)
                         .priority(Priority.HIGH)
+                        //using cache strategy for caching image on first time load
+                        //good for app loading performance
                         .diskCacheStrategy(DiskCacheStrategy.ALL))
                 .transition(withCrossFade())
                 .thumbnail(0.1f)
