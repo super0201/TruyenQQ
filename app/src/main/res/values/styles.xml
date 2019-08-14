@@ -13,6 +13,13 @@
         <item name="fontFamily">@font/uvn</item>
     </style>
 
+    <style name="ToggleSwitchTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlHighlight">@color/white</item>
+        <item name="colorSwitchThumbNormal">@color/white</item>
+        <item name="colorButtonNormal">@color/white</item>
+    </style>
+
     <style name="splashScreenTheme" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar">
         <item name="android:windowBackground">@layout/splash_screen</item>
     </style>

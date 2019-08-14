@@ -1,24 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/grey65"
+    android:orientation="vertical">
 
-    <ImageView
+    <LinearLayout
+        android:id="@+id/lnProfileSum"
+        android:outlineAmbientShadowColor="@color/backgroundSet"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"
-        android:src="@raw/no_internet"
-        tools:ignore="MissingConstraints" />
+        android:layout_height="@dimen/_80sdp"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:layout_marginLeft="@dimen/_3sdp"
+        android:layout_marginRight="@dimen/_3sdp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:id="@+id/imvProfile"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:src="@raw/no_internet"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/_15sdp">
 
-    <TextView
+            <TextView
+                android:id="@+id/tvProfileName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:textSize="@dimen/_15sdp"
+                android:fontFamily="@font/uvn"
+                android:textColor="@color/white"
+                android:text="Hotel Xin Chào! Saquadikhap!"/>
+
+            <TextView
+                android:id="@+id/tvRole"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_10sdp"
+                android:fontFamily="@font/uvn"
+                android:textColor="@color/white"
+                android:text="App Được Viết Bởi Team OneSoft!"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lnNoti"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="This Is User!"
-        android:textAlignment="center"
-        android:fontFamily="@font/uvn"
-        android:textSize="@dimen/_40sdp"
-        tools:ignore="MissingConstraints" />
+        android:layout_height="@dimen/_40sdp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="@dimen/_3sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_3sdp"
+        android:background="@color/colorPrimary"
+        android:outlineAmbientShadowColor="@color/backgroundSet">
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:fontFamily="@font/uvn"
+            android:text="Nhận thông báo truyện mới"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp" />
+
+        <Switch
+            android:id="@+id/swNoti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/_100sdp"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lnFacebook"
+        android:outlineAmbientShadowColor="@color/backgroundSet"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginLeft="@dimen/_3sdp"
+        android:layout_marginRight="@dimen/_3sdp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:fontFamily="@font/uvn"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp"
+            android:text="Facebook: facebook.com/truyenqq"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lnWeb"
+        android:outlineAmbientShadowColor="@color/backgroundSet"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginLeft="@dimen/_3sdp"
+        android:layout_marginRight="@dimen/_3sdp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:fontFamily="@font/uvn"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp"
+            android:text="Website: mangahay.net"/>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:background="@drawable/round_button"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:text="Đăng Xuất"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="0dp"
+            android:textAlignment="center"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:fontFamily="@font/uvn"
+            android:text="v1.1.0"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+    </RelativeLayout>
+
+
+</LinearLayout>

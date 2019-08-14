@@ -41,8 +41,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity_layout);
 
-
-
         //register ServiceAPI and call getJSON from server
         api = ServiceAPI.createService(NetworkAPI.class);
 

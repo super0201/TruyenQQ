@@ -63,10 +63,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public ViewHolder(View itemView) {
             super( itemView );
-            imageView = (ImageView) itemView.findViewById( R.id.ivManga );
-            tvName = (TextView) itemView.findViewById( R.id.tvName );
-            tvCate = (TextView) itemView.findViewById( R.id.tvCate );
-            tvDate = (TextView) itemView.findViewById( R.id.tvDateAdd );
+            imageView = itemView.findViewById( R.id.ivManga );
+            tvName = itemView.findViewById( R.id.tvName );
+            tvCate = itemView.findViewById( R.id.tvCate );
+            tvDate = itemView.findViewById( R.id.tvDateAdd );
 
         }
     }

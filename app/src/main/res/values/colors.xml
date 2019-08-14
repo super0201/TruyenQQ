@@ -11,6 +11,8 @@
     <color name="grey65">#A6A6A6</color>
     <color name="Search">#000</color>
 
+    <color name="transparent">#00000000</color>
+
     <color name="primary_dark">#e4c749</color>
     <color name="primary_darker">#efd252</color>
     <color name="accent">#FFFFFF</color>
