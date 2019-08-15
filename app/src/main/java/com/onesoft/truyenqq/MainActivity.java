@@ -25,6 +25,7 @@ import com.onesoft.truyenqq.fragment.FragmentUser;
 
 public class MainActivity extends AppCompatActivity {
     private final int SPLASH_SURATION = 500; //0.5 seconds
+    private SharedPreferences prefs;
     Fragment fragment = null;
 
     @SuppressLint("MissingSuperCall")
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.navigation_favorite:
+                    //check if user is logged in yet
                     final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                     if(pref.contains("isLoggedIn") || pref.contains("isTempLoggedIn")){
                         fragment = new FragmentFav();
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.navigation_user:
+                    //check if user is logged in yet
                     final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                     if(prefs.contains("isLoggedIn") || prefs.contains("isTempLoggedIn")){
                         fragment = new FragmentUser();
@@ -139,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         //clear temporary login prefs
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         SharedPreferences.Editor editor = prefs.edit();
         editor.remove("isTempLoggedIn");
         editor.apply();
@@ -159,6 +162,12 @@ public class MainActivity extends AppCompatActivity {
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        //clear temporary login prefs
+                        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.remove("isTempLoggedIn");
+                        editor.apply();
+
                         moveTaskToBack(true);
                         finish();
                     }
