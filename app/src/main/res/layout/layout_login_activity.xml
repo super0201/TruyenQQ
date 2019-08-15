@@ -65,6 +65,7 @@
 
         </android.support.design.widget.TextInputLayout>
 
+
         <CheckBox
             android:id="@+id/ckbRemember"
             android:layout_width="match_parent"
@@ -82,7 +83,7 @@
             android:id="@+id/btnLogin"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_35sdp"
+            android:layout_marginTop="@dimen/_50sdp"
             android:padding="@dimen/_12sdp"
             android:textSize="@dimen/_12sdp"
             android:text="Login"

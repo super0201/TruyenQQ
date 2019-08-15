@@ -15,6 +15,7 @@
         android:layout_marginTop="@dimen/_3sdp"
         android:layout_marginLeft="@dimen/_3sdp"
         android:layout_marginRight="@dimen/_3sdp"
+        android:elevation="@dimen/_2sdp"
         android:background="@color/colorPrimary"
         android:orientation="horizontal"
         >
@@ -59,6 +60,7 @@
         android:layout_marginLeft="@dimen/_3sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_3sdp"
+        android:elevation="@dimen/_2sdp"
         android:background="@color/colorPrimary"
         android:outlineAmbientShadowColor="@color/backgroundSet">
 
@@ -89,6 +91,7 @@
         android:layout_marginTop="@dimen/_2sdp"
         android:layout_marginLeft="@dimen/_3sdp"
         android:layout_marginRight="@dimen/_3sdp"
+        android:elevation="@dimen/_2sdp"
         android:background="@color/colorPrimary">
 
         <TextView
@@ -112,6 +115,7 @@
         android:layout_marginTop="@dimen/_2sdp"
         android:layout_marginLeft="@dimen/_3sdp"
         android:layout_marginRight="@dimen/_3sdp"
+        android:elevation="@dimen/_2sdp"
         android:background="@color/colorPrimary">
 
         <TextView
@@ -136,6 +140,7 @@
         android:text="Đăng Xuất"
         android:textSize="@dimen/_12sdp"
         android:textStyle="bold"
+        android:elevation="@dimen/_2sdp"
         android:textColor="@color/white"
         android:layout_gravity="center"/>
 

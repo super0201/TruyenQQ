@@ -27,7 +27,6 @@ import network.ServiceAPI;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import session.SessionManager;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -39,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_activity_layout);
+        setContentView(R.layout.layout_login_activity);
 
         //register ServiceAPI and call getJSON from server
         api = ServiceAPI.createService(NetworkAPI.class);
@@ -92,7 +91,6 @@ public class LoginActivity extends AppCompatActivity {
                 "Wait a bit mate!", true);
         dialog.show();
 
-
         //authentication from server
         new Handler().postDelayed(
                 new Runnable() {
@@ -106,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
                         // onLoginFailed();
                         dialog.dismiss();
                     }
-                }, 3000);
+                }, 2000);
     }
 
 
@@ -144,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
                     //write in sharedpref
                     final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                     SharedPreferences.Editor editor = prefs.edit();
-                    editor.putBoolean("isLoggedIn", true);
+                    editor.putBoolean("isTempLoggedIn", true);
                     editor.putString("user", user);
                     editor.putString("pass", pass);
                     editor.commit();

@@ -1,6 +1,7 @@
 package com.onesoft.truyenqq.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -19,9 +20,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.onesoft.truyenqq.MainActivity;
 import com.onesoft.truyenqq.R;
-
-import java.util.ArrayList;
 
 import model.User;
 import network.NetworkAPI;
@@ -44,7 +44,7 @@ public class FragmentUser extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user, container, false);
+        View view = inflater.inflate(R.layout.layout_fragment_user, container, false);
 
         //register ServiceAPI and call getJSON from server
         api = ServiceAPI.createService(NetworkAPI.class);
@@ -60,11 +60,13 @@ public class FragmentUser extends Fragment {
             public void onClick(View v) {
                 final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.clear();
-                editor.commit();
+                editor.remove("user");
+                editor.remove("pass");
+                editor.remove("isLoggedIn");
+                editor.apply();
 
-                getActivity().moveTaskToBack(true);
-                getActivity().finish();
+                Intent i = new Intent(getContext(), MainActivity.class);
+                startActivity(i);
             }
         });
 

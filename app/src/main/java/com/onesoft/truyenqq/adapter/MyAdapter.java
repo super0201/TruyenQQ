@@ -14,7 +14,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.onesoft.truyenqq.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -44,9 +43,8 @@ public class MyAdapter extends ArrayAdapter<Manga> {
     private static class ViewHolder{
         public final RelativeLayout rootView;
         public final ImageView imageView;
-        public final TextView tvName;
-        public final TextView tvCate;
-        public final TextView tvDate;
+        public final TextView tvName, tvCate, tvDate;
+
 
         public ViewHolder(RelativeLayout rootView, ImageView imageView, TextView tvName, TextView tvCate, TextView tvDate) {
             this.rootView = rootView;
@@ -57,10 +55,10 @@ public class MyAdapter extends ArrayAdapter<Manga> {
         }
 
         public static ViewHolder create(RelativeLayout rootView) {
-            ImageView imageView = rootView.findViewById( R.id.ivManga );
+            ImageView imageView = rootView.findViewById( R.id.imvManga );
             TextView tvName = rootView.findViewById( R.id.tvName );
             TextView tvCate = rootView.findViewById( R.id.tvCate );
-            TextView tvDate = rootView.findViewById( R.id.tvDateAdd );
+            TextView tvDate = rootView.findViewById( R.id.tvDate );
 
             return new ViewHolder(rootView, imageView, tvName, tvCate,tvDate);
         }

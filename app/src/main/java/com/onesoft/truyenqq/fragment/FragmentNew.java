@@ -15,13 +15,13 @@ import android.view.ViewGroup;
 import com.github.silvestrpredko.dotprogressbar.DotProgressBar;
 import com.github.silvestrpredko.dotprogressbar.DotProgressBarBuilder;
 import com.onesoft.truyenqq.R;
+import com.onesoft.truyenqq.adapter.RecyclerItemClickListener;
 import com.onesoft.truyenqq.adapter.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 
 import model.ListManga;
 import model.Manga;
-import network.InternetConnection;
 import network.NetworkAPI;
 import network.ServiceAPI;
 import retrofit2.Call;
@@ -29,9 +29,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FragmentNew extends Fragment {
-//    private MyAdapter adapter;
-//    private ListView lvManga;
-
     private RecyclerView rvManga;
     private Integer index = 0;
     RecyclerViewAdapter adapter;
@@ -41,14 +38,75 @@ public class FragmentNew extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate( R.layout.fragment_new, container, false);
+        View view = inflater.inflate( R.layout.layout_fragment_new, container, false);
 
-//        lvManga = view.findViewById( R.id.lvManga );
+        rvManga = view.findViewById(R.id.rvManga);
 
-        rvManga = view.findViewById( R.id.rvManga );
+        ShowView(view);
 
-        ShowView( view );
+        //set onClick event for item
+        rvManga.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+//                        Intent intent = new Intent(getContext(), DetailNewActivity.class);
+//                        intent.putParcelableArrayListExtra("data", list);
+//                        intent.putExtra("pos", position);
+//                        startActivity(intent);
+//                        getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                    }
+                }));
+
         return view;
+    }
+
+    private void ShowView(View view){
+        view.getApplicationWindowToken();
+
+        //Dot progress bar with nice view - should use this often
+        new DotProgressBarBuilder(getContext())
+                .setDotAmount(4)
+                .setStartColor(Color.BLUE)
+                .setEndColor(Color.CYAN)
+                .setAnimationDirection(DotProgressBar.LEFT_DIRECTION)
+                .build();
+
+        //This is how you create thread in a fragment - high loading speed baby!
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //Creating an object of our api interface
+                NetworkAPI api = ServiceAPI.getDataComic();
+
+                // Calling JSON
+                Call<ListManga> call = api.getDataComic(index);
+
+                // Enqueue Callback will be call when get response...
+                call.enqueue(new Callback<ListManga>() {
+                    @Override
+                    public void onResponse(Call<ListManga> call, Response<ListManga> response) {
+                        if(response.isSuccessful()) {
+                            // Got Successfully
+                            mangaArrayList = response.body().getMangas();
+
+                            // Binding that List to Adapter
+                            adapter = new RecyclerViewAdapter( mangaArrayList,getContext());
+                            GridLayoutManager manager = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
+
+                            rvManga.setLayoutManager( manager );
+                            rvManga.setAdapter( adapter );
+                        } else {
+                            Snackbar.make(parentLayout, "There is something wrong...hmm?!", Snackbar.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ListManga> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -168,60 +226,6 @@ public class FragmentNew extends Fragment {
 //        } );
 //    }}
 
-    public void ShowView(View view){
-        view.getApplicationWindowToken();
-
-        if (InternetConnection.checkConnection( view.getContext()) ) {
-            //Dot progress bar with nice view - should use this often
-            new DotProgressBarBuilder(getContext())
-                    .setDotAmount(4)
-                    .setStartColor(Color.BLACK)
-                    .setAnimationDirection(DotProgressBar.LEFT_DIRECTION)
-                    .build();
-
-            //This is how you create thread in a fragment - high loading speed baby!
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-
-                    //Creating an object of our api interface
-                    NetworkAPI api = ServiceAPI.getDataComic();
-
-                    // Calling JSON
-                    Call<ListManga> call = api.getDataComic(index);
-
-                    // Enqueue Callback will be call when get response...
-                    call.enqueue(new Callback<ListManga>() {
-                        @Override
-
-                        public void onResponse(Call<ListManga> call, Response<ListManga> response)
-                        {
-                            if(response.isSuccessful()) {
-
-                                // Got Successfully
-                                mangaArrayList = response.body().getMangas();
-
-                                // Binding that List to Adapter
-                                adapter = new RecyclerViewAdapter( mangaArrayList,getContext());
-                                GridLayoutManager manager = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
-
-                                rvManga.setLayoutManager( manager );
-                                rvManga.setAdapter( adapter );
-
-                            } else {
-
-                                Snackbar.make(parentLayout, "There is something wrong...hmm?!", Snackbar.LENGTH_LONG).show();
-                            }
-                        }
-                        @Override
-                        public void onFailure(Call<ListManga> call, Throwable t) {
-
-                        }
-                    });
-                }
-            });
-        }
-    }
 }
 
 

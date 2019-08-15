@@ -20,6 +20,7 @@ import com.kobakei.ratethisapp.RateThisApp;
 import com.onesoft.truyenqq.fragment.FragmentCate;
 import com.onesoft.truyenqq.fragment.FragmentFav;
 import com.onesoft.truyenqq.fragment.FragmentNew;
+import com.onesoft.truyenqq.fragment.FragmentNoFav;
 import com.onesoft.truyenqq.fragment.FragmentUser;
 
 public class MainActivity extends AppCompatActivity {
@@ -64,16 +65,22 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.navigation_favorite:
-                    fragment = new FragmentFav();
+                    final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                    if(pref.contains("isLoggedIn") || pref.contains("isTempLoggedIn")){
+                        fragment = new FragmentFav();
+                    } else {
+                        fragment = new FragmentNoFav();
+                    }
+
                     break;
 
                 case R.id.navigation_user:
                     final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-                    if(!prefs.contains("isLoggedIn")){
+                    if(prefs.contains("isLoggedIn") || prefs.contains("isTempLoggedIn")){
+                        fragment = new FragmentUser();
+                    } else {
                         Intent i = new Intent(getBaseContext(), LoginActivity.class);
                         startActivity(i);
-                    } else {
-                        fragment = new FragmentUser();
                     }
                     break;
 
@@ -131,7 +138,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        moveTaskToBack(true);
+        //clear temporary login prefs
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove("isTempLoggedIn");
+        editor.apply();
+
         finish();
         super.onDestroy();
     }

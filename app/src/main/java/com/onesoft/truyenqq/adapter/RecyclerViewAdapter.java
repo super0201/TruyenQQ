@@ -1,27 +1,22 @@
 package com.onesoft.truyenqq.adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.onesoft.truyenqq.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import model.Manga;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-
     List<Manga> mangaList;
     Context context;
     //EVENT CLICK ITEM..//
@@ -63,10 +58,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public ViewHolder(View itemView) {
             super( itemView );
-            imageView = itemView.findViewById( R.id.ivManga );
+            imageView = itemView.findViewById( R.id.imvManga );
             tvName = itemView.findViewById( R.id.tvName );
             tvCate = itemView.findViewById( R.id.tvCate );
-            tvDate = itemView.findViewById( R.id.tvDateAdd );
+            tvDate = itemView.findViewById( R.id.tvDate );
 
         }
     }

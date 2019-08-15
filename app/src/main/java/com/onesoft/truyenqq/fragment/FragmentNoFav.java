@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 
 import com.onesoft.truyenqq.R;
 
-public class FragmentCate extends Fragment {
+public class FragmentNoFav extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_fragment_cate, container, false);
+        View view = inflater.inflate(R.layout.layout_no_bookmark, container, false);
 
         return view;
     }
