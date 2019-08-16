@@ -32,7 +32,6 @@ public class FragmentNew extends Fragment {
     private RecyclerView rvManga;
     private Integer index = 0;
     RecyclerViewAdapter adapter;
-    private View parentLayout;
     private ArrayList<Manga> mangaArrayList;
 
     @Nullable
@@ -96,7 +95,7 @@ public class FragmentNew extends Fragment {
                             rvManga.setLayoutManager( manager );
                             rvManga.setAdapter( adapter );
                         } else {
-                            Snackbar.make(parentLayout, "There is something wrong...hmm?!", Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(getView(), "There is something wrong...hmm?!", Snackbar.LENGTH_LONG).show();
                         }
                     }
 

@@ -23,12 +23,19 @@
             android:label="@string/app_name">
 
         </activity>
+
         <activity android:name=".LoginActivity">
 
         </activity>
+
         <activity android:name=".SignupActivity">
 
         </activity>
+
+        <activity android:name=".DetailUserActivity">
+
+        </activity>
+
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
