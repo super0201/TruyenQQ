@@ -13,6 +13,13 @@ public interface NetworkAPI {
                                   @Query("pass") String pass,
                                   @Query("name") String name,
                                   @Query("date") String date);
+
+    @GET("api_update_user.php")
+    Call<User> update(@Query("user") String user,
+                                  @Query("email") String pass,
+                                  @Query("name") String name,
+                                  @Query("date") String date);
+
     @GET("api_check_user.php")
     Call<ServerResponse> checkLogin(@Query("user") String user,
                                     @Query("pass") String pass);
