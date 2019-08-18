@@ -1,20 +1,30 @@
 package com.onesoft.truyenqq.fragment;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
 import com.github.silvestrpredko.dotprogressbar.DotProgressBar;
 import com.github.silvestrpredko.dotprogressbar.DotProgressBarBuilder;
 import com.onesoft.truyenqq.R;
+import com.onesoft.truyenqq.activity.DetailNewActivity;
 import com.onesoft.truyenqq.adapter.RecyclerItemClickListener;
 import com.onesoft.truyenqq.adapter.RecyclerViewAdapter;
 
@@ -27,6 +37,9 @@ import network.ServiceAPI;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
+import static com.bumptech.glide.request.RequestOptions.centerCropTransform;
 
 public class FragmentNew extends Fragment {
     private RecyclerView rvManga;
@@ -54,6 +67,8 @@ public class FragmentNew extends Fragment {
 //                        intent.putExtra("pos", position);
 //                        startActivity(intent);
 //                        getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+//
+//                        Toast.makeText( getContext(),"name: "+mangaArrayList.get( position ).getName(),Toast.LENGTH_SHORT ).show();
                     }
                 }));
 
@@ -107,6 +122,89 @@ public class FragmentNew extends Fragment {
                 });
             }
         });
+        rvManga.addOnItemTouchListener( new RecyclerItemClickListener( getContext(), new RecyclerItemClickListener.OnItemClickListener() {
+            @SuppressLint("ResourceType")
+            @Override
+            public void onItemClick(View view, int position) {
+                String name = mangaArrayList.get( position ).getName();
+                TextView tvName_dia,tvCate_dia,tvDate_dia,tvDescription_dia;ImageView imageView;
+
+                LayoutInflater inflater = getLayoutInflater();
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(view.getContext() );
+                view = inflater.inflate( R.layout.item_dialog_manga,null );
+                mBuilder.setView( view ).setTitle( "Information: " ).setCancelable( true ).create().show();
+                for(position=0; position<mangaArrayList.size(); position++){
+                    if (name.equals( mangaArrayList.get( position ).getName() )){
+                        tvName_dia = view.findViewById( R.id.tvName_dia );
+                        tvCate_dia = view.findViewById( R.id.tvCate_dia );
+                        tvDate_dia = view.findViewById( R.id.tvDate_dia );
+                        tvDescription_dia = view.findViewById( R.id.tvDescription_dia );
+                        imageView = view.findViewById( R.id.ivManga_dia );
+
+                        Button btnGoto_dia = (Button)view.findViewById( R.id.btnGoto_dia ) ;
+
+                        tvName_dia.setText( mangaArrayList.get( position ).getName() );
+                        tvCate_dia.setText( mangaArrayList.get( position ).getCategory() );
+                        tvDate_dia.setText( mangaArrayList.get( position ).getDate_add() );
+                        tvDescription_dia.setText( mangaArrayList.get( position ).getDescription() );
+
+
+                        //With Picasso - Slow request and process image
+                        //Let's practice with Glide
+
+//                        Picasso.with(view.getContext())
+//                                  .load(mangaArrayList.get(i).getThumb())
+//                                  .placeholder(R.mipmap.ic_launcher)
+//                                  .error(R.mipmap.ic_launcher)
+//                                  .into(imageView);
+
+                        //With Glide - Fast, and out-performed Picasso
+                        Glide.with(view.getContext())
+                                .load(mangaArrayList.get(position).getThumb())
+                                .apply(centerCropTransform()
+                                        .placeholder(R.raw.thumbs_up)
+                                        .error(R.raw.no_internet)
+                                        .priority( Priority.HIGH))
+                                .transition(withCrossFade())
+                                .thumbnail(0.1f)
+                                .into(imageView);
+
+                        final int finalPosition = position;
+                        btnGoto_dia.setOnClickListener( new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                String name = mangaArrayList.get( finalPosition ).getName();
+                                String cate = mangaArrayList.get( finalPosition ).getCategory();
+                                String date = mangaArrayList.get( finalPosition ).getDate_add();
+                                String desc = mangaArrayList.get( finalPosition ).getDescription();
+                                String img = mangaArrayList.get( finalPosition ).getThumb();
+
+                                Intent intent = new Intent(getContext(), DetailNewActivity.class);
+
+                                mangaArrayList = new ArrayList<>(  );
+//                                intent.putParcelableArrayListExtra("data_all",list );
+//                                intent.putExtra("mangaName", name );
+//                                intent.putStringArrayListExtra( "key", )
+                                intent.putExtra( "mangaName", name );
+                                intent.putExtra( "mangaCate", cate );
+                                intent.putExtra( "mangaDate", date );
+                                intent.putExtra( "mangaDesc", desc);
+                                intent.putExtra( "img", img);
+
+                                startActivity(intent);
+                                getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
+                            }
+                        } );
+
+                        break;
+                    }
+
+                }
+            }
+        }));
+
     }
 
     @Override
