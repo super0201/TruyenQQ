@@ -20,8 +20,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.onesoft.truyenqq.DetailUserActivity;
 import com.onesoft.truyenqq.MainActivity;
 import com.onesoft.truyenqq.R;
+
+import java.util.Date;
 
 import model.User;
 import network.NetworkAPI;
@@ -36,6 +39,8 @@ import static com.bumptech.glide.request.RequestOptions.centerCropTransform;
 public class FragmentUser extends Fragment {
     private static final String TAG = "FragmentUser";
     private NetworkAPI api;
+    String name, email, thumb, user;
+    Date date;
     LinearLayout lnProfile;
     TextView tvName, tvUsername;
     ImageView imvProfile;
@@ -58,15 +63,29 @@ public class FragmentUser extends Fragment {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.remove("user");
-                editor.remove("pass");
-                editor.remove("isLoggedIn");
-                editor.apply();
+            final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.remove("user");
+            editor.remove("pass");
+            editor.remove("isLoggedIn");
+            editor.apply();
 
-                Intent i = new Intent(getContext(), MainActivity.class);
-                startActivity(i);
+            Intent i = new Intent(getContext(), MainActivity.class);
+            startActivity(i);
+            }
+        });
+
+        lnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), DetailUserActivity.class);
+                intent.putExtra("user", user);
+                intent.putExtra("name", name);
+                intent.putExtra("email", email);
+                intent.putExtra("thumb", thumb);
+                intent.putExtra("date", date);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
             }
         });
 
@@ -77,7 +96,7 @@ public class FragmentUser extends Fragment {
 
     public void getUserDetail(View view){
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        final String user = prefs.getString("user", null);
+        user = prefs.getString("user", null);
 
         getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -88,9 +107,16 @@ public class FragmentUser extends Fragment {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                         if(response.isSuccessful()){
+                            //get all value for intent purpose
+                            name = response.body().getName();
+                            email = response.body().getEmail();
+                            thumb = response.body().getThumb();
+                            date = response.body().getDate_add();
+
                             tvName.setText(response.body().getName());
 
                             tvUsername.setText(response.body().getUsername());
+
                             Glide.with(getContext()).load(response.body().getThumb())
                                     .apply(centerCropTransform()
                                             .placeholder(R.raw.loading)
