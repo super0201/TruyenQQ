@@ -14,15 +14,15 @@ import com.onesoft.truyenqq.R;
 
 import java.util.List;
 
-import model.Manga;
+import model.ModelManga;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    List<Manga> mangaList;
+public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerView.ViewHolder> {
+    List<ModelManga> modelMangaList;
     Context context;
     //EVENT CLICK ITEM..//
 
-    public RecyclerViewAdapter(List<Manga> mangaList, Context c){
-        this.mangaList = mangaList;
+    public AdapterRecyclerView(List<ModelManga> modelMangaList, Context c){
+        this.modelMangaList = modelMangaList;
         this.context = c ;
     }
 
@@ -35,7 +35,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Manga item = mangaList.get(position);
+        ModelManga item = modelMangaList.get(position);
         holder.tvName.setText(item.getName());
         holder.tvCate.setText(item.getCategory());
         holder.tvDate.setText(item.getDate_add());
@@ -46,7 +46,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return mangaList.size();
+        return modelMangaList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

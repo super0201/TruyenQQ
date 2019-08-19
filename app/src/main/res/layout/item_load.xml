@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_10sdp">
+
+    <com.github.silvestrpredko.dotprogressbar.DotProgressBar
+        android:id="@+id/dot_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        custom:amount="4"
+        custom:duration="@android:integer/config_mediumAnimTime"
+        custom:endColor="@color/colorSilver"
+        custom:startColor="@color/colorPrimary"
+        custom:animationDirection="right"
+        tools:ignore="MissingConstraints" />
+
+</LinearLayout>

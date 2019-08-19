@@ -3,7 +3,7 @@ package model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Manga {
+public class ModelManga {
 
     @SerializedName( "id" )
     @Expose
@@ -33,9 +33,9 @@ public class Manga {
     @Expose
     private String date_update;
 
-    public Manga() { }
+    public ModelManga() { }
 
-    public Manga(String id, String name, String thumb, String category, String description, String date_add, String date_update) {
+    public ModelManga(String id, String name, String thumb, String category, String description, String date_add, String date_update) {
         this.id = id;
         this.name = name;
         this.thumb = thumb;

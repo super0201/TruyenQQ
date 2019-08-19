@@ -16,25 +16,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.DetailNewActivity"></activity>
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait">
-
-        </activity>
-
-        <activity android:name=".LoginActivity">
-
-        </activity>
-
-        <activity android:name=".SignupActivity">
-
-        </activity>
-
-        <activity android:name=".DetailUserActivity">
-
-        </activity>
 
         <activity android:name=".SplashActivity">
             <intent-filter>
@@ -43,6 +24,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".SignupActivity"/>
+        <activity android:name=".DetailUserActivity"/>
+        <activity android:name=".DetailNewActivity"/>
+        <activity android:name=".ActivityCateList"/>
+        <activity android:name=".DetailCateActivity"/>
+
     </application>
 
 </manifest>

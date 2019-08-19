@@ -7,67 +7,95 @@
     <ImageView
         android:id="@+id/ivManga_dia"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="@dimen/_160sdp"
         android:src="@mipmap/ic_launcher" />
+
     <TextView
         android:id="@+id/tvName_dia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_3sdp"
         android:textSize="@dimen/_16sdp"
         android:layout_gravity="center"
+        android:fontFamily="@font/uvn"
         android:textStyle="bold"
         android:text="sds"
         android:textColor="#000" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:layout_marginLeft="@dimen/_3sdp"
+        android:layout_marginRight="@dimen/_3sdp"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Category: "
+            android:fontFamily="@font/uvn"
             android:textColor="#000"
             android:textSize="@dimen/_11sdp"/>
+
         <TextView
             android:id="@+id/tvCate_dia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="sdasf "
+            android:fontFamily="@font/uvn"
             android:layout_weight="1"
             android:paddingLeft="@dimen/_4sdp"
-            android:textColor="#000"
+            android:textColor="@color/black"
             android:textSize="@dimen/_11sdp"/>
+
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginLeft="@dimen/_3sdp"
+        android:layout_marginRight="@dimen/_3sdp"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Date: "
             android:textColor="#000"
+            android:fontFamily="@font/uvn"
             android:textSize="@dimen/_11sdp"/>
+
         <TextView
             android:id="@+id/tvDate_dia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="sdasf "
+            android:fontFamily="@font/uvn"
             android:layout_weight="1"
             android:paddingLeft="@dimen/_4sdp"
             android:textColor="#000"
             android:textSize="@dimen/_11sdp"/>
+
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginLeft="@dimen/_3sdp"
+        android:layout_marginRight="@dimen/_3sdp"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Description: "
             android:textColor="#000"
+            android:fontFamily="@font/uvn"
             android:textSize="@dimen/_11sdp"/>
+
         <TextView
             android:id="@+id/tvDescription_dia"
             android:layout_width="match_parent"
@@ -76,14 +104,19 @@
             android:layout_weight="1"
             android:paddingLeft="@dimen/_4sdp"
             android:textColor="#000"
+            android:fontFamily="@font/uvn"
             android:textSize="@dimen/_11sdp"/>
+
     </LinearLayout>
+
     <Button
         android:id="@+id/btnGoto_dia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go to"
+        android:text="More"
+        android:textColor="@color/white"
         android:layout_gravity="right"
-        android:background="@color/green_A100"
+        android:background="@color/colorPrimary"
         android:layout_margin="@dimen/_2sdp"/>
+
 </LinearLayout>

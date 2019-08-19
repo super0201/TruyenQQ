@@ -38,8 +38,8 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_activity_signup);
 
-        //register ServiceAPI and call getJSON from server
-        api = ServiceAPI.createService(NetworkAPI.class);
+        //registerUser ServiceAPI and call getJSON from server
+        api = ServiceAPI.userService(NetworkAPI.class);
 
         _user = findViewById(R.id.inputUser);
         _name = findViewById(R.id.inputName);
@@ -98,7 +98,7 @@ public class SignupActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Call<ServerResponse> call = api.register(user, pass, name, date);
+                Call<ServerResponse> call = api.registerUser(user, pass, name, date);
                 call.enqueue(new Callback<ServerResponse>() {
                     @SuppressLint("ResourceType")
                     @Override
@@ -115,7 +115,7 @@ public class SignupActivity extends AppCompatActivity {
                             text.setText(R.string.reg_success);
 
                             Toast toast = new Toast(getApplicationContext());
-                            toast.setGravity(Gravity.BOTTOM, 0, 60);
+                            toast.setGravity(Gravity.BOTTOM, 0, 180);
                             toast.setDuration(Toast.LENGTH_SHORT);
                             toast.setView(layout);
                             toast.show();
@@ -134,7 +134,7 @@ public class SignupActivity extends AppCompatActivity {
                             text.setText(R.string.reg_failed);
 
                             Toast toast = new Toast(getApplicationContext());
-                            toast.setGravity(Gravity.BOTTOM, 0, 60);
+                            toast.setGravity(Gravity.BOTTOM, 0, 180);
                             toast.setDuration(Toast.LENGTH_SHORT);
                             toast.setView(layout);
                             toast.show();

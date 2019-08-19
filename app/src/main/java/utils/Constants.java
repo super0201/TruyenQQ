@@ -1,7 +1,7 @@
 package utils;
 
 public class Constants {
-    public static final String REGISTER_OPERATION = "register";
+    public static final String REGISTER_OPERATION = "registerUser";
     public static final String LOGIN_OPERATION = "login";
     public static final String CHANGE_PASSWORD_OPERATION = "chgPass";
 

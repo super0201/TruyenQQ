@@ -24,7 +24,6 @@ import java.util.Date;
 import java.util.Locale;
 
 import model.ServerResponse;
-import model.User;
 import network.NetworkAPI;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -87,9 +86,10 @@ public class DetailUserActivity extends AppCompatActivity {
                         .placeholder(R.raw.loading)
                         .error(R.raw.error)
                         .priority(Priority.HIGH)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL))
+                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                 .transition(withCrossFade())
-                .thumbnail(0.1f)
+                .thumbnail(0.5f)
+                .onlyRetrieveFromCache(true)
                 .into(imvThumb);
     }
 
@@ -102,7 +102,7 @@ public class DetailUserActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Call<ServerResponse> call = api.update(update1, update2, update3, date);
+                Call<ServerResponse> call = api.updateUser(update1, update2, update3, date);
                 call.enqueue(new Callback<ServerResponse>() {
                     @SuppressLint("ResourceType")
                     @Override
@@ -119,7 +119,7 @@ public class DetailUserActivity extends AppCompatActivity {
                             text.setText(R.string.update_success);
 
                             Toast toast = new Toast(getApplicationContext());
-                            toast.setGravity(Gravity.BOTTOM, 0, 60);
+                            toast.setGravity(Gravity.BOTTOM, 0, 180);
                             toast.setDuration(Toast.LENGTH_SHORT);
                             toast.setView(layout);
                             toast.show();
@@ -138,7 +138,7 @@ public class DetailUserActivity extends AppCompatActivity {
                             text.setText(R.string.update_failed);
 
                             Toast toast = new Toast(getApplicationContext());
-                            toast.setGravity(Gravity.BOTTOM, 0, 60);
+                            toast.setGravity(Gravity.BOTTOM, 0, 180);
                             toast.setDuration(Toast.LENGTH_SHORT);
                             toast.setView(layout);
                             toast.show();

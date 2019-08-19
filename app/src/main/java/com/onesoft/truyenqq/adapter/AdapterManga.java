@@ -17,28 +17,28 @@ import com.onesoft.truyenqq.R;
 
 import java.util.List;
 
-import model.Manga;
+import model.ModelManga;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 import static com.bumptech.glide.request.RequestOptions.centerCropTransform;
 
-public class MyAdapter extends ArrayAdapter<Manga> {
+public class AdapterManga extends ArrayAdapter<ModelManga> {
 
-    List<Manga> mangaList;
+    List<ModelManga> modelMangaList;
     Context context;
     private LayoutInflater mInflater;
 
     //*8*//
-    public MyAdapter(Context context, List<Manga> objects) {
+    public AdapterManga(Context context, List<ModelManga> objects) {
         super( context, 0, objects );
         this.context = context;
         this.mInflater = LayoutInflater.from(context);
-        mangaList = objects;
+        modelMangaList = objects;
     }
 
     @Override
-    public Manga getItem(int position) {
-        return mangaList.get(position);
+    public ModelManga getItem(int position) {
+        return modelMangaList.get(position);
     }
     private static class ViewHolder{
         public final RelativeLayout rootView;
@@ -75,7 +75,7 @@ public class MyAdapter extends ArrayAdapter<Manga> {
             vh = (ViewHolder) convertView.getTag();
         }
 
-        Manga item = getItem(position);
+        ModelManga item = getItem(position);
         vh.tvName.setText(item.getName());
         vh.tvCate.setText(item.getCategory());
         vh.tvDate.setText(item.getDate_add());
@@ -88,9 +88,9 @@ public class MyAdapter extends ArrayAdapter<Manga> {
                         .priority(Priority.HIGH)
                         //using cache strategy for caching image on first time load
                         //good for app loading performance
-                        .diskCacheStrategy(DiskCacheStrategy.ALL))
+                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                 .transition(withCrossFade())
-                .thumbnail(0.1f)
+                .thumbnail(0.5f)
                 .into(vh.imageView);
 
         return vh.rootView;

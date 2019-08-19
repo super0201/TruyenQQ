@@ -17,21 +17,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.github.silvestrpredko.dotprogressbar.DotProgressBar;
 import com.github.silvestrpredko.dotprogressbar.DotProgressBarBuilder;
 import com.onesoft.truyenqq.R;
-import com.onesoft.truyenqq.activity.DetailNewActivity;
+import com.onesoft.truyenqq.DetailNewActivity;
 import com.onesoft.truyenqq.adapter.RecyclerItemClickListener;
-import com.onesoft.truyenqq.adapter.RecyclerViewAdapter;
+import com.onesoft.truyenqq.adapter.AdapterRecyclerView;
 
 import java.util.ArrayList;
 
-import model.ListManga;
-import model.Manga;
+import model.ModelListManga;
+import model.ModelManga;
 import network.NetworkAPI;
 import network.ServiceAPI;
 import retrofit2.Call;
@@ -44,8 +44,8 @@ import static com.bumptech.glide.request.RequestOptions.centerCropTransform;
 public class FragmentNew extends Fragment {
     private RecyclerView rvManga;
     private Integer index = 0;
-    RecyclerViewAdapter adapter;
-    private ArrayList<Manga> mangaArrayList;
+    AdapterRecyclerView adapter;
+    private ArrayList<ModelManga> modelMangaArrayList;
 
     @Nullable
     @Override
@@ -57,19 +57,19 @@ public class FragmentNew extends Fragment {
         ShowView(view);
 
         //set onClick event for item
-        rvManga.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),
-                new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
+//        rvManga.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),
+//                new RecyclerItemClickListener.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(View view, int position) {
 //                        Intent intent = new Intent(getContext(), DetailNewActivity.class);
 //                        intent.putParcelableArrayListExtra("data", list);
 //                        intent.putExtra("pos", position);
 //                        startActivity(intent);
 //                        getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 //
-//                        Toast.makeText( getContext(),"name: "+mangaArrayList.get( position ).getName(),Toast.LENGTH_SHORT ).show();
-                    }
-                }));
+//                        Toast.makeText( getContext(),"name: "+modelMangaArrayList.get( position ).getName(),Toast.LENGTH_SHORT ).show();
+//                    }
+//                }));
 
         return view;
     }
@@ -93,18 +93,18 @@ public class FragmentNew extends Fragment {
                 NetworkAPI api = ServiceAPI.getDataComic();
 
                 // Calling JSON
-                Call<ListManga> call = api.getDataComic(index);
+                Call<ModelListManga> call = api.getDataComic(index);
 
                 // Enqueue Callback will be call when get response...
-                call.enqueue(new Callback<ListManga>() {
+                call.enqueue(new Callback<ModelListManga>() {
                     @Override
-                    public void onResponse(Call<ListManga> call, Response<ListManga> response) {
+                    public void onResponse(Call<ModelListManga> call, Response<ModelListManga> response) {
                         if(response.isSuccessful()) {
                             // Got Successfully
-                            mangaArrayList = response.body().getMangas();
+                            modelMangaArrayList = response.body().getMangases();
 
                             // Binding that List to Adapter
-                            adapter = new RecyclerViewAdapter( mangaArrayList,getContext());
+                            adapter = new AdapterRecyclerView(modelMangaArrayList,getContext());
                             GridLayoutManager manager = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
 
                             rvManga.setLayoutManager( manager );
@@ -115,7 +115,7 @@ public class FragmentNew extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<ListManga> call, Throwable t) {
+                    public void onFailure(Call<ModelListManga> call, Throwable t) {
 
                     }
                 });
@@ -126,15 +126,15 @@ public class FragmentNew extends Fragment {
             @SuppressLint("ResourceType")
             @Override
             public void onItemClick(View view, int position) {
-                String name = mangaArrayList.get( position ).getName();
+                String name = modelMangaArrayList.get( position ).getName();
                 TextView tvName_dia,tvCate_dia,tvDate_dia,tvDescription_dia;ImageView imageView;
 
                 LayoutInflater inflater = getLayoutInflater();
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(view.getContext() );
                 view = inflater.inflate( R.layout.item_dialog_manga,null );
-                mBuilder.setView( view ).setTitle( "Information: " ).setCancelable( true ).create().show();
-                for(position=0; position<mangaArrayList.size(); position++){
-                    if (name.equals( mangaArrayList.get( position ).getName() )){
+                mBuilder.setView( view ).setCancelable( true ).create().show();
+                for(position=0; position< modelMangaArrayList.size(); position++){
+                    if (name.equals( modelMangaArrayList.get( position ).getName() )){
                         tvName_dia = view.findViewById( R.id.tvName_dia );
                         tvCate_dia = view.findViewById( R.id.tvCate_dia );
                         tvDate_dia = view.findViewById( R.id.tvDate_dia );
@@ -143,30 +143,31 @@ public class FragmentNew extends Fragment {
 
                         Button btnGoto_dia = (Button)view.findViewById( R.id.btnGoto_dia ) ;
 
-                        tvName_dia.setText( mangaArrayList.get( position ).getName() );
-                        tvCate_dia.setText( mangaArrayList.get( position ).getCategory() );
-                        tvDate_dia.setText( mangaArrayList.get( position ).getDate_add() );
-                        tvDescription_dia.setText( mangaArrayList.get( position ).getDescription() );
+                        tvName_dia.setText( modelMangaArrayList.get( position ).getName() );
+                        tvCate_dia.setText( modelMangaArrayList.get( position ).getCategory() );
+                        tvDate_dia.setText( modelMangaArrayList.get( position ).getDate_add() );
+                        tvDescription_dia.setText( modelMangaArrayList.get( position ).getDescription() );
 
 
                         //With Picasso - Slow request and process image
                         //Let's practice with Glide
 
 //                        Picasso.with(view.getContext())
-//                                  .load(mangaArrayList.get(i).getThumb())
+//                                  .load(modelMangaArrayList.get(i).getThumb())
 //                                  .placeholder(R.mipmap.ic_launcher)
 //                                  .error(R.mipmap.ic_launcher)
 //                                  .into(imageView);
 
                         //With Glide - Fast, and out-performed Picasso
                         Glide.with(view.getContext())
-                                .load(mangaArrayList.get(position).getThumb())
+                                .load(modelMangaArrayList.get(position).getThumb())
                                 .apply(centerCropTransform()
                                         .placeholder(R.raw.thumbs_up)
                                         .error(R.raw.no_internet)
-                                        .priority( Priority.HIGH))
+                                        .priority( Priority.HIGH)
+                                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                                 .transition(withCrossFade())
-                                .thumbnail(0.1f)
+                                .onlyRetrieveFromCache(true)
                                 .into(imageView);
 
                         final int finalPosition = position;
@@ -174,15 +175,15 @@ public class FragmentNew extends Fragment {
                             @Override
                             public void onClick(View view) {
 
-                                String name = mangaArrayList.get( finalPosition ).getName();
-                                String cate = mangaArrayList.get( finalPosition ).getCategory();
-                                String date = mangaArrayList.get( finalPosition ).getDate_add();
-                                String desc = mangaArrayList.get( finalPosition ).getDescription();
-                                String img = mangaArrayList.get( finalPosition ).getThumb();
+                                String name = modelMangaArrayList.get( finalPosition ).getName();
+                                String cate = modelMangaArrayList.get( finalPosition ).getCategory();
+                                String date = modelMangaArrayList.get( finalPosition ).getDate_add();
+                                String desc = modelMangaArrayList.get( finalPosition ).getDescription();
+                                String img = modelMangaArrayList.get( finalPosition ).getThumb();
 
                                 Intent intent = new Intent(getContext(), DetailNewActivity.class);
 
-                                mangaArrayList = new ArrayList<>(  );
+                                modelMangaArrayList = new ArrayList<>(  );
 //                                intent.putParcelableArrayListExtra("data_all",list );
 //                                intent.putExtra("mangaName", name );
 //                                intent.putStringArrayListExtra( "key", )
@@ -212,118 +213,6 @@ public class FragmentNew extends Fragment {
         super.onResume();
 
     }
-
-//    public void Show(View view){
-////        final Context context = getActivity().getApplicationContext();
-//        view.getApplicationWindowToken();
-//
-//        if (InternetConnection.checkConnection( view.getContext()) ) {
-//            //Dot progress bar with nice view - should use this often
-//            new DotProgressBarBuilder(getContext())
-//                    .setDotAmount(4)
-//                    .setStartColor(Color.BLACK)
-//                    .setAnimationDirection(DotProgressBar.LEFT_DIRECTION)
-//                    .build();
-//
-//            //This is how you create thread in a fragment - high loading speed baby!
-//            getActivity().runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//
-//                    //Creating an object of our api interface
-//                    NetworkAPI api = ServiceAPI.getDataComic();
-//
-//                    // Calling JSON
-//                    Call<ListManga> call = api.getDataComic();
-//
-//                    // Enqueue Callback will be call when get response...
-//                    call.enqueue(new Callback<ListManga>() {
-//                        @Override
-//
-//                        public void onResponse(Call<ListManga> call, Response<ListManga> response)
-//                        {
-//                            //Dismiss Dialog
-////                    dialog.dismiss();
-//
-//                            if(response.isSuccessful()) {
-//
-//                                // Got Successfully
-//                                mangaArrayList = response.body().getMangas();
-//
-//                                // Binding that List to Adapter
-//                                adapter = new MyAdapter(getContext(), mangaArrayList);
-//                                lvManga.setAdapter(adapter);
-//
-//                            } else {
-//
-//                                Snackbar.make(parentLayout, "There is something wrong...hmm?!", Snackbar.LENGTH_LONG).show();
-//                            }
-//                        }
-//                        @Override
-//                        public void onFailure(Call<ListManga> call, Throwable t) {
-////                    dialog.dismiss();
-//                        }
-//                    });
-//                }
-//            });
-//
-//
-//        lvManga.setOnItemClickListener( new AdapterView.OnItemClickListener() {
-//            @SuppressLint("ResourceType")
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-////                Toast.makeText( view.getContext(),"Position"+ i + mangaArrayList.get(i).getDescription(),Toast.LENGTH_SHORT ).show();
-//
-//                String name = mangaArrayList.get( i ).getName();
-//                TextView tvName_dia,tvCate_dia,tvDate_dia,tvDescription_dia;
-//                ImageView imageView;
-//
-//                LayoutInflater inflater = getLayoutInflater();
-//                AlertDialog.Builder mBuilder = new AlertDialog.Builder( view.getContext() );
-//                view = inflater.inflate( R.layout.dialog_item_manga,null );
-//                mBuilder.setView( view ).setTitle( "Information: " ).setCancelable( true ).create().show();
-//                for(i=0; i<mangaArrayList.size(); i++){
-//                    if (name.equals( mangaArrayList.get( i ).getName() )){
-//                        tvName_dia = view.findViewById( R.id.tvName_dia );
-//                        tvCate_dia = view.findViewById( R.id.tvCate_dia );
-//                        tvDate_dia = view.findViewById( R.id.tvDate_dia );
-//                        tvDescription_dia = view.findViewById( R.id.tvDescription_dia );
-//                        imageView = view.findViewById( R.id.ivManga_dia );
-//
-//                        tvName_dia.setText( mangaArrayList.get( i ).getName() );
-//                        tvCate_dia.setText( mangaArrayList.get( i ).getCategory() );
-//                        tvDate_dia.setText( mangaArrayList.get( i ).getDate_add() );
-//                        tvDescription_dia.setText( mangaArrayList.get( i ).getDescription() );
-//
-//
-//                        //With Picasso - Slow request and process image
-//                        //Let's practice with Glide
-//
-////                        Picasso.with(view.getContext())
-////                                  .load(mangaArrayList.get(i).getThumb())
-////                                  .placeholder(R.mipmap.ic_launcher)
-////                                  .error(R.mipmap.ic_launcher)
-////                                  .into(imageView);
-//
-//                        //With Glide - Fast, and out-performed Picasso
-//                        Glide.with(view.getContext())
-//                                .load(mangaArrayList.get(i).getThumb())
-//                                .apply(centerCropTransform()
-//                                        .placeholder(R.raw.thumbs_up)
-//                                        .error(R.raw.no_internet)
-//                                        .priority(Priority.HIGH))
-//                                .transition(withCrossFade())
-//                                .thumbnail(0.1f)
-//                                .into(imageView);
-//
-//                        break;
-//                    }
-//
-//                }
-//            }
-//        } );
-//    }}
-
 }
 
 

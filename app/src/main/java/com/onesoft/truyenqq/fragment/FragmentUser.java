@@ -26,7 +26,7 @@ import com.onesoft.truyenqq.R;
 
 import java.util.Date;
 
-import model.User;
+import model.ModelUser;
 import network.NetworkAPI;
 import network.ServiceAPI;
 import retrofit2.Call;
@@ -51,8 +51,8 @@ public class FragmentUser extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_fragment_user, container, false);
 
-        //register ServiceAPI and call getJSON from server
-        api = ServiceAPI.createService(NetworkAPI.class);
+        //registerUser ServiceAPI and call getJSON from server
+        api = ServiceAPI.userService(NetworkAPI.class);
 
         lnProfile = view.findViewById(R.id.lnProfileSum);
         tvName = view.findViewById(R.id.tvProfileName);
@@ -68,7 +68,8 @@ public class FragmentUser extends Fragment {
             editor.remove("user");
             editor.remove("pass");
             editor.remove("isLoggedIn");
-            editor.apply();
+            editor.remove("isTempLoggedIn");
+            editor.commit();
 
             Intent i = new Intent(getContext(), MainActivity.class);
             startActivity(i);
@@ -101,11 +102,11 @@ public class FragmentUser extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Call<User> call = api.getUser(user);
-                call.enqueue(new Callback<User>() {
+                Call<ModelUser> call = api.getUser(user);
+                call.enqueue(new Callback<ModelUser>() {
                     @SuppressLint("ResourceType")
                     @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
+                    public void onResponse(Call<ModelUser> call, Response<ModelUser> response) {
                         if(response.isSuccessful()){
                             //get all value for intent purpose
                             name = response.body().getName();
@@ -124,7 +125,8 @@ public class FragmentUser extends Fragment {
                                             .priority(Priority.HIGH)
                                             .diskCacheStrategy(DiskCacheStrategy.ALL))
                                     .transition(withCrossFade())
-                                    .thumbnail(0.1f)
+                                    .thumbnail(0.5f)
+                                    .onlyRetrieveFromCache(true)
                                     .into(imvProfile);
                         } else {
                             Log.e(TAG, " Response Error " + response.code());
@@ -132,7 +134,7 @@ public class FragmentUser extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<User> call, Throwable t) {
+                    public void onFailure(Call<ModelUser> call, Throwable t) {
                         Log.e(TAG," Response Error "+ t.getMessage());
                     }
                 });

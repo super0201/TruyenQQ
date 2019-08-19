@@ -6,25 +6,28 @@
     <string name="title_user">User</string>
 
     <string name="no_internet">Well...No Internet!</string>
-    <string name="notice">Cảm ơn bạn đã sử dụng App TruyenQQ! TruyenQQ luôn cập nhật cho các bạn những bộ truyện mới sớm nhất!</string>
+    <string name="notice">Thank you for using TruyenQQ! New comic update everyday!</string>
 
     //rate app
-    <string name="rate_1">Rate Cho Tao!</string>
-    <string name="rate_2">DM Rate App Cho Tao!!</string>
+    <string name="rate_1">Rate For Me!</string>
+    <string name="rate_2">Rate App For Me!!</string>
     <string name="rate_yes">Sure!</string>
     <string name="rate_no">Nope</string>
     <string name="rate_later">Wait Me...</string>
-    <string name="exit_app">Bạn Muốn Thoát Ứng Dụng? </string>
+    <string name="exit_app">You Want To Exit App? </string>
 
     //login
-    <string name="login_success">Vào rồi kìa, ghê chưa!</string>
+    <string name="login_success">Vào rồi kìa, ghê hôn!</string>
     <string name="login_failed">Úi giời, login gì tầm này!</string>
 
     //register
     <string name="reg_success">Chồi ôi, register được luôn kìa! Ghê hôn</string>
     <string name="reg_failed">Số bạn nhọ quá!</string>
 
-    //update user
+    //update modelUser
     <string name="update_success">Update Success!</string>
     <string name="update_failed">Update Failed Miserably!</string>
+
+    //loadmore
+    <string name="no_more">Hết rồi load gì nữa má ôi!</string>
 </resources>

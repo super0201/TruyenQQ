@@ -99,7 +99,7 @@ public class SplashActivity extends Activity {
                         text.setText(R.string.no_internet);
 
                         Toast toast = new Toast(getApplicationContext());
-                        toast.setGravity(Gravity.BOTTOM, 0, 60);
+                        toast.setGravity(Gravity.BOTTOM, 0, 180);
                         toast.setDuration(Toast.LENGTH_SHORT);
                         toast.setView(layout);
                         toast.show();

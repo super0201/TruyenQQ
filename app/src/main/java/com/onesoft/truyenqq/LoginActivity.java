@@ -40,8 +40,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login_activity);
 
-        //register ServiceAPI and call getJSON from server
-        api = ServiceAPI.createService(NetworkAPI.class);
+        //registerUser ServiceAPI and call getJSON from server
+        api = ServiceAPI.userService(NetworkAPI.class);
 
         btnLogin = findViewById(R.id.btnLogin);
         etUser = findViewById(R.id.etUser);
@@ -134,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
                     text.setText(R.string.login_success);
 
                     Toast toast = new Toast(getApplicationContext());
-                    toast.setGravity(Gravity.BOTTOM, 0, 60);
+                    toast.setGravity(Gravity.BOTTOM, 0, 180);
                     toast.setDuration(Toast.LENGTH_SHORT);
                     toast.setView(layout);
                     toast.show();
@@ -161,7 +161,7 @@ public class LoginActivity extends AppCompatActivity {
                     text.setText(R.string.login_failed);
 
                     Toast toast = new Toast(getApplicationContext());
-                    toast.setGravity(Gravity.BOTTOM, 0, 60);
+                    toast.setGravity(Gravity.BOTTOM, 0, 180);
                     toast.setDuration(Toast.LENGTH_SHORT);
                     toast.setView(layout);
                     toast.show();
@@ -191,7 +191,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = etPass.getText().toString();
 
         if (user.isEmpty()) {
-            etUser.setError("User can't be empty!");
+            etUser.setError("ModelUser can't be empty!");
             valid = false;
         }
         if (password.isEmpty() || password.length() < 8) {

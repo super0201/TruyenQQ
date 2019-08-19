@@ -3,12 +3,12 @@ package model;
 public class ServerResponse {
     private String message;
     private Integer result;
-    private User user;
+    private ModelUser modelUser;
 
-    public ServerResponse(Integer result, String message, User user) {
+    public ServerResponse(Integer result, String message, ModelUser modelUser) {
         this.result = result;
         this.message = message;
-        this.user = user;
+        this.modelUser = modelUser;
     }
 
     public Integer getResult() {
@@ -27,11 +27,11 @@ public class ServerResponse {
         this.message = message;
     }
 
-    public User getUser() {
-        return user;
+    public ModelUser getModelUser() {
+        return modelUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setModelUser(ModelUser modelUser) {
+        this.modelUser = modelUser;
     }
 }
