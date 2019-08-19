@@ -121,6 +121,7 @@ public class FragmentNew extends Fragment {
                 });
             }
         });
+
         rvManga.addOnItemTouchListener( new RecyclerItemClickListener( getContext(), new RecyclerItemClickListener.OnItemClickListener() {
             @SuppressLint("ResourceType")
             @Override

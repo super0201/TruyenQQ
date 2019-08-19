@@ -19,7 +19,12 @@
     //login
     <string name="login_success">Vào rồi kìa, ghê chưa!</string>
     <string name="login_failed">Úi giời, login gì tầm này!</string>
+
     //register
     <string name="reg_success">Chồi ôi, register được luôn kìa! Ghê hôn</string>
     <string name="reg_failed">Số bạn nhọ quá!</string>
+
+    //update user
+    <string name="update_success">Update Success!</string>
+    <string name="update_failed">Update Failed Miserably!</string>
 </resources>
