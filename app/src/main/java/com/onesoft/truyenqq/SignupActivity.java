@@ -93,12 +93,13 @@ public class SignupActivity extends AppCompatActivity {
         final String user = _user.getText().toString();
         final String pass = _re_pass.getText().toString();
         final String name = _name.getText().toString();
+        final String thumb = "https://i.imgur.com/hDiR3Esh.png";
         final String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Call<ServerResponse> call = api.registerUser(user, pass, name, date);
+                Call<ServerResponse> call = api.registerUser(user, pass, name, thumb, date);
                 call.enqueue(new Callback<ServerResponse>() {
                     @SuppressLint("ResourceType")
                     @Override
@@ -217,7 +218,7 @@ public class SignupActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        moveTaskToBack(true);
         finish();
+        overridePendingTransition(R.anim.push_left_out, R.anim.push_left_in);
     }
 }

@@ -92,26 +92,26 @@
             android:textColor="@color/black"
             android:theme="@style/AppTheme.Dark" />
 
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btnSignUp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_15sdp"
-            android:padding="@dimen/_12sdp"
-            android:textSize="@dimen/_12sdp"
-            android:fontFamily="@font/uvn"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:text="Register An Account?"
-            android:theme="@style/AppTheme.Dark" />
-
         <com.facebook.login.widget.LoginButton
             android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/tvReg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Register Account"
+            android:textColor="@color/white"
+            android:fontFamily="@font/uvn"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="bold"
+            android:textAlignment="center"/>
+
+
 
     </LinearLayout>
 

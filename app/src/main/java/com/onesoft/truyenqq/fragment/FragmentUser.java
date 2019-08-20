@@ -22,9 +22,16 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.onesoft.truyenqq.DetailUserActivity;
 import com.onesoft.truyenqq.MainActivity;
 import com.onesoft.truyenqq.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Date;
 
@@ -42,6 +49,7 @@ public class FragmentUser extends Fragment {
     private static final String TAG = "FragmentUser";
     private NetworkAPI api;
     private FragmentTransaction ft;
+    CallbackManager callbackManager;
     String name, email, thumb, user;
     Date date;
     LinearLayout lnProfile;
@@ -56,6 +64,9 @@ public class FragmentUser extends Fragment {
 
         //registerUser ServiceAPI and call getJSON from server
         api = ServiceAPI.userService(NetworkAPI.class);
+
+        //create callback manager
+        callbackManager = CallbackManager.Factory.create();
 
         lnProfile = view.findViewById(R.id.lnProfileSum);
         tvName = view.findViewById(R.id.tvProfileName);
@@ -95,7 +106,49 @@ public class FragmentUser extends Fragment {
 
         getUserDetail(view);
 
+        getUserProfile(AccessToken.getCurrentAccessToken());
         return view;
+    }
+
+    private void getUserProfile(AccessToken currentAccessToken) {
+        GraphRequest request = GraphRequest.newMeRequest(
+                currentAccessToken, new GraphRequest.GraphJSONObjectCallback() {
+                    @SuppressLint("ResourceType")
+                    @Override
+                    public void onCompleted(JSONObject object, GraphResponse response) {
+                        Log.d("TAG", object.toString());
+                        try {
+                            String first_name = object.getString("first_name");
+                            String last_name = object.getString("last_name");
+                            String email = object.getString("email");
+                            String id = object.getString("id");
+                            String image_url = "https://graph.facebook.com/" + id + "/picture?type=normal";
+
+                            tvName.setText(first_name + last_name);
+                            tvUsername.setText(email);
+//                            Picasso.with(MainActivity.this).load(image_url).into(imageView);
+
+                            Glide.with(getContext()).load(image_url)
+                                    .apply(centerCropTransform()
+                                            .placeholder(R.raw.loading)
+                                            .error(R.raw.error)
+                                            .priority(Priority.HIGH)
+                                            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
+                                    .transition(withCrossFade())
+                                    .thumbnail(0.5f)
+                                    .into(imvProfile);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "first_name,last_name,email,id");
+        request.setParameters(parameters);
+        request.executeAsync();
     }
 
     public void getUserDetail(View view){
@@ -151,5 +204,8 @@ public class FragmentUser extends Fragment {
             ft = getFragmentManager().beginTransaction();
             ft.detach(this).attach(this).commit();
         }
+
+        //register callback
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 }

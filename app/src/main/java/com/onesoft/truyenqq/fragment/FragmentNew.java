@@ -112,7 +112,8 @@ public class FragmentNew extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 String name = modelMangaArrayList.get( position ).getName();
-                TextView tvName_dia,tvCate_dia,tvDate_dia,tvDescription_dia;ImageView imageView;
+                final TextView tvName_dia,tvCate_dia,tvDate_dia,tvDescription_dia;
+                final ImageView imageView;
 
                 LayoutInflater inflater = getLayoutInflater();
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(view.getContext() );
@@ -126,13 +127,7 @@ public class FragmentNew extends Fragment {
                         tvDescription_dia = view.findViewById( R.id.tvDescription_dia );
                         imageView = view.findViewById( R.id.ivManga_dia );
 
-                        Button btnGoto_dia = (Button)view.findViewById( R.id.btnGoto_dia ) ;
-
-                        tvName_dia.setText( modelMangaArrayList.get( position ).getName() );
-                        tvCate_dia.setText( modelMangaArrayList.get( position ).getCategory() );
-                        tvDate_dia.setText( modelMangaArrayList.get( position ).getDate_add() );
-                        tvDescription_dia.setText( modelMangaArrayList.get( position ).getDescription() );
-
+                        Button btnGoto_dia = view.findViewById( R.id.btnGoto_dia );
 
                         //With Picasso - Slow request and process image
                         //Let's practice with Glide
@@ -144,16 +139,30 @@ public class FragmentNew extends Fragment {
 //                                  .into(imageView);
 
                         //With Glide - Fast, and out-performed Picasso
-                        Glide.with(view.getContext())
-                                .load(modelMangaArrayList.get(position).getThumb())
-                                .apply(centerCropTransform()
-                                        .placeholder(R.raw.thumbs_up)
-                                        .error(R.raw.no_internet)
-                                        .priority( Priority.HIGH)
-                                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
-                                .transition(withCrossFade())
-                                .onlyRetrieveFromCache(true)
-                                .into(imageView);
+                        final View finalView = view;
+                        final int finalPosition1 = position;
+                        final int finalPosition2 = position;
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                tvName_dia.setText( modelMangaArrayList.get(finalPosition2).getName() );
+                                tvCate_dia.setText( modelMangaArrayList.get(finalPosition2).getCategory() );
+                                tvDate_dia.setText( modelMangaArrayList.get(finalPosition2).getDate_add() );
+                                tvDescription_dia.setText( modelMangaArrayList.get(finalPosition2).getDescription() );
+
+                                Glide.with(finalView.getContext())
+                                        .load(modelMangaArrayList.get(finalPosition1).getThumb())
+                                        .apply(centerCropTransform()
+                                                .placeholder(R.raw.thumbs_up)
+                                                .error(R.raw.no_internet)
+                                                .priority( Priority.HIGH)
+                                                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
+                                        .transition(withCrossFade())
+                                        .onlyRetrieveFromCache(true)
+                                        .into(imageView);
+                            }
+                        });
+
 
                         final int finalPosition = position;
                         btnGoto_dia.setOnClickListener( new View.OnClickListener() {

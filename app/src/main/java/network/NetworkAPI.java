@@ -16,6 +16,7 @@ public interface NetworkAPI {
     Call<ServerResponse> registerUser(@Query("user") String user,
                                       @Query("pass") String pass,
                                       @Query("name") String name,
+                                      @Query("thumb") String thumb,
                                       @Query("date") String date);
 
     @GET("api_update_user.php")
@@ -26,7 +27,7 @@ public interface NetworkAPI {
 
     @GET("api_check_user.php")
     Call<ServerResponse> checkLogin(@Query("user") String user,
-                                    @Query("pass") String pass);
+                                    @Query("pass") String pass); 
 
     @GET("api_get_user.php")
     Call<ModelUser> getUser(@Query("user") String user);
