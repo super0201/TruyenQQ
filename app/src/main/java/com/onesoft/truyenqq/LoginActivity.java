@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         //facebook login
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LoginManager.getInstance().registerCallback(callbackManager,

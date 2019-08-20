@@ -12,6 +12,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface NetworkAPI {
+    //for user
     @GET("api_register.php")
     Call<ServerResponse> registerUser(@Query("user") String user,
                                       @Query("pass") String pass,
@@ -27,11 +28,16 @@ public interface NetworkAPI {
 
     @GET("api_check_user.php")
     Call<ServerResponse> checkLogin(@Query("user") String user,
-                                    @Query("pass") String pass); 
+                                    @Query("pass") String pass);
+
+    @GET("api_update_pass.php")
+    Call<ServerResponse> updatePass(@Query("user") String user,
+                                    @Query("pass") String pass);
 
     @GET("api_get_user.php")
     Call<ModelUser> getUser(@Query("user") String user);
 
+    //for comic
     @GET("api_get_comic.php")
     Call<ModelListManga> getDataComic(@Query("index") Integer index);
 
