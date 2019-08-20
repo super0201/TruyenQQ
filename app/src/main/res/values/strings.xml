@@ -28,8 +28,11 @@
     <string name="reg_failed">Số bạn nhọ quá!</string>
 
     //update modelUser
-    <string name="update_success">Update Success!</string>
-    <string name="update_failed">Update Failed Miserably!</string>
+    <string name="update_success">Chồi ôi! Profile update được luôn kìa!</string>
+    <string name="update_success1">Update được password kìa! Ghê ghê</string>
+    <string name="update_failed">Lại update gì tầm này</string>
+    <string name="update_failed1">Thôi thôi bỏ đi...update gì!</string>
+
 
     //loadmore
     <string name="no_more">Hết rồi load gì nữa má ôi!</string>

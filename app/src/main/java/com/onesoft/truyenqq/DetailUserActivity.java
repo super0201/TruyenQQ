@@ -3,7 +3,10 @@ package com.onesoft.truyenqq;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -39,7 +42,7 @@ public class DetailUserActivity extends AppCompatActivity {
     private NetworkAPI api;
     Button btnUpdate, btnUpdate1;
     ImageView imvThumb, imvBack;
-    EditText email, name;
+    EditText email, name, etNew, etRe_Pass;
     TextView date, user;
     String user1, email1, name1, thumb1;
 
@@ -57,6 +60,8 @@ public class DetailUserActivity extends AppCompatActivity {
         email = findViewById(R.id.etMail);
         name = findViewById(R.id.etName);
         date = findViewById(R.id.tvDate);
+        etNew = findViewById(R.id.etNewPass);
+        etRe_Pass = findViewById(R.id.etRePass2);
         btnUpdate = findViewById(R.id.btnUpdateUser);
         btnUpdate1 = findViewById(R.id.btnUpdatePass);
 
@@ -70,7 +75,7 @@ public class DetailUserActivity extends AppCompatActivity {
         btnUpdate1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                doUpdate();
+                updatePass();
             }
         });
 
@@ -114,6 +119,81 @@ public class DetailUserActivity extends AppCompatActivity {
                 .transition(withCrossFade())
                 .onlyRetrieveFromCache(true)
                 .into(imvThumb);
+    }
+
+    public void updatePass(){
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        final String user_ = prefs.getString("user", null);
+        final String updatePass = etNew.getText().toString();
+        final String updatePass2 = etRe_Pass.getText().toString();
+
+        if (!updatePass2.equals(updatePass)){
+            Toast.makeText(getBaseContext(), "Úi giời mới có tí mà đã nhập sai password!", Toast.LENGTH_SHORT);
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Call<ServerResponse> call = api.updatePass(user_, updatePass2);
+                    call.enqueue(new Callback<ServerResponse>() {
+                        @SuppressLint("ResourceType")
+                        @Override
+                        public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                            Toast.makeText(getBaseContext(), response.message(), Toast.LENGTH_SHORT);
+                            if(response.isSuccessful()){
+                                LayoutInflater inflater = getLayoutInflater();
+                                View layout = inflater.inflate(R.layout.custom_toast,
+                                        (ViewGroup) findViewById(R.id.custom_toast_container));
+
+                                TextView text = layout.findViewById(R.id.text);
+                                ImageView img = layout.findViewById(R.id.imgToast);
+                                img.setImageResource(R.raw.thumbs_up);
+                                text.setText(R.string.update_success1);
+
+                                Toast toast = new Toast(getApplicationContext());
+                                toast.setGravity(Gravity.BOTTOM, 0, 180);
+                                toast.setDuration(Toast.LENGTH_SHORT);
+                                toast.setView(layout);
+                                toast.show();
+
+                                SharedPreferences.Editor editor = prefs.edit();
+                                editor.remove("user");
+                                editor.remove("pass");
+                                editor.remove("isLoggedIn");
+                                editor.remove("isTempLoggedIn");
+                                editor.commit();
+
+                                Intent i = new Intent(getBaseContext(), LoginActivity.class);
+                                startActivity(i);
+
+                            } else {
+                                LayoutInflater inflater = getLayoutInflater();
+                                View layout = inflater.inflate(R.layout.custom_toast,
+                                        (ViewGroup) findViewById(R.id.custom_toast_container));
+
+                                TextView text = layout.findViewById(R.id.text);
+                                ImageView img = layout.findViewById(R.id.imgToast);
+                                img.setImageResource(R.raw.no_internet);
+                                text.setText(R.string.update_failed1);
+
+                                Toast toast = new Toast(getApplicationContext());
+                                toast.setGravity(Gravity.BOTTOM, 0, 180);
+                                toast.setDuration(Toast.LENGTH_SHORT);
+                                toast.setView(layout);
+                                toast.show();
+
+//                            Log.e(TAG," Response Error "+ response.code());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ServerResponse> call, Throwable t) {
+                            Log.e(TAG," Response Error "+ t.getMessage());
+                        }
+                    });
+
+                }
+            });
+        }
     }
 
     public void doUpdate(){

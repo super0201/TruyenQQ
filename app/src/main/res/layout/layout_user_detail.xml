@@ -41,7 +41,7 @@
         android:id="@+id/lnProfileSum"
         android:outlineAmbientShadowColor="@color/backgroundSet"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_80sdp"
+        android:layout_height="@dimen/_100sdp"
         android:layout_marginTop="@dimen/_3sdp"
         android:layout_marginLeft="@dimen/_3sdp"
         android:layout_marginRight="@dimen/_3sdp"
@@ -52,20 +52,30 @@
 
         <ImageView
             android:id="@+id/imvThumb"
-            android:layout_width="@dimen/_70sdp"
-            android:layout_height="@dimen/_70sdp"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/_10sdp"
             android:src="@raw/loading"/>
 
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"
+        android:text="User Profile"
+        android:textAlignment="center"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
         android:layout_alignParentEnd="true"
         android:layout_marginLeft="@dimen/_3sdp"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:layout_marginRight="@dimen/_3sdp"
         android:elevation="@dimen/_2sdp"
         android:orientation="vertical"
@@ -156,72 +166,82 @@
 
     </LinearLayout>
 
-    <!--<LinearLayout-->
-        <!--android:outlineAmbientShadowColor="@color/backgroundSet"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="@dimen/_53sdp"-->
-        <!--android:layout_marginTop="@dimen/_3sdp"-->
-        <!--android:layout_marginLeft="@dimen/_3sdp"-->
-        <!--android:layout_marginRight="@dimen/_3sdp"-->
-        <!--android:elevation="@dimen/_2sdp"-->
-        <!--android:background="@color/colorPrimary">-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"
+        android:text="Change Password"
+        android:textAlignment="center"/>
 
-        <!--<android.support.design.widget.TextInputLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_margin="@dimen/_3sdp"-->
-            <!--android:theme="@style/AppTheme.Dark">-->
+    <LinearLayout
+        android:outlineAmbientShadowColor="@color/backgroundSet"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_3sdp"
+        android:layout_marginRight="@dimen/_3sdp"
+        android:elevation="@dimen/_2sdp"
+        android:background="@color/colorPrimary">
 
-            <!--<EditText-->
-                <!--android:id="@+id/etPassword"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:hint="Email"-->
-                <!--android:fontFamily="@font/uvn"-->
-                <!--android:inputType="text"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:textColorLink="@color/white"-->
-                <!--android:textColorHighlight="@color/white"-->
-                <!--android:textColorHint="@color/white"  />-->
-        <!--</android.support.design.widget.TextInputLayout>-->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_3sdp"
+            android:theme="@style/AppTheme.Dark">
 
-    <!--</LinearLayout>-->
+            <EditText
+                android:id="@+id/etNewPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="New Password"
+                android:fontFamily="@font/uvn"
+                android:inputType="textVisiblePassword"
+                android:textColor="@color/white"
+                android:textColorLink="@color/white"
+                android:textColorHighlight="@color/white"
+                android:textColorHint="@color/white"  />
+        </android.support.design.widget.TextInputLayout>
 
-    <!--<LinearLayout-->
-        <!--android:outlineAmbientShadowColor="@color/backgroundSet"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="@dimen/_53sdp"-->
-        <!--android:layout_marginTop="@dimen/_3sdp"-->
-        <!--android:layout_marginLeft="@dimen/_3sdp"-->
-        <!--android:layout_marginRight="@dimen/_3sdp"-->
-        <!--android:elevation="@dimen/_2sdp"-->
-        <!--android:background="@color/colorPrimary">-->
+    </LinearLayout>
 
-        <!--<android.support.design.widget.TextInputLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_margin="@dimen/_3sdp"-->
-            <!--android:theme="@style/AppTheme.Dark">-->
+    <LinearLayout
+        android:outlineAmbientShadowColor="@color/backgroundSet"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:layout_marginLeft="@dimen/_3sdp"
+        android:layout_marginRight="@dimen/_3sdp"
+        android:elevation="@dimen/_2sdp"
+        android:background="@color/colorPrimary">
 
-            <!--<EditText-->
-                <!--android:id="@+id/etRePassword"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:hint="Re-enter Password"-->
-                <!--android:fontFamily="@font/uvn"-->
-                <!--android:inputType="text"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:textColorLink="@color/white"-->
-                <!--android:textColorHighlight="@color/white"-->
-                <!--android:textColorHint="@color/white"  />-->
-        <!--</android.support.design.widget.TextInputLayout>-->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_3sdp"
+            android:theme="@style/AppTheme.Dark">
 
-    <!--</LinearLayout>-->
+            <EditText
+                android:id="@+id/etRePass2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Re-enter Password"
+                android:fontFamily="@font/uvn"
+                android:inputType="textVisiblePassword"
+                android:textColor="@color/white"
+                android:textColorLink="@color/white"
+                android:textColorHighlight="@color/white"
+                android:textColorHint="@color/white"  />
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_30sdp"
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_10sdp"
         android:orientation="horizontal">
@@ -255,7 +275,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_3sdp">
 
         <TextView
             android:layout_width="match_parent"
@@ -270,6 +291,7 @@
             android:text="v1.1.0"
             android:textStyle="bold"
             tools:ignore="HardcodedText" />
+
     </RelativeLayout>
 
 

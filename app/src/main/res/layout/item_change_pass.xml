@@ -32,7 +32,7 @@
             tools:ignore="MissingConstraints">
 
             <EditText
-                android:id="@+id/etPass"
+                android:id="@+id/etNewPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="New Password"
@@ -56,7 +56,7 @@
             tools:ignore="MissingConstraints">
 
             <EditText
-                android:id="@+id/etRe_Pass"
+                android:id="@+id/etRenew_Pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Re-enter Password"
@@ -70,7 +70,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnChange"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
