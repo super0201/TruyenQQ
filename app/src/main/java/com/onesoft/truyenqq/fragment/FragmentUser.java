@@ -105,8 +105,8 @@ public class FragmentUser extends Fragment {
         });
 
         getUserDetail(view);
-
-        getUserProfile(AccessToken.getCurrentAccessToken());
+//
+//        getUserProfile(AccessToken.getCurrentAccessToken());
         return view;
     }
 
