@@ -1,6 +1,7 @@
 package com.onesoft.truyenqq.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +41,7 @@ import static com.bumptech.glide.request.RequestOptions.centerCropTransform;
 public class FragmentUser extends Fragment {
     private static final String TAG = "FragmentUser";
     private NetworkAPI api;
+    private FragmentTransaction ft;
     String name, email, thumb, user;
     Date date;
     LinearLayout lnProfile;
@@ -115,7 +118,6 @@ public class FragmentUser extends Fragment {
                             date = response.body().getDate_add();
 
                             tvName.setText(response.body().getName());
-
                             tvUsername.setText(response.body().getUsername());
 
                             Glide.with(getContext()).load(response.body().getThumb())
@@ -123,10 +125,9 @@ public class FragmentUser extends Fragment {
                                             .placeholder(R.raw.loading)
                                             .error(R.raw.error)
                                             .priority(Priority.HIGH)
-                                            .diskCacheStrategy(DiskCacheStrategy.ALL))
+                                            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                                     .transition(withCrossFade())
                                     .thumbnail(0.5f)
-                                    .onlyRetrieveFromCache(true)
                                     .into(imvProfile);
                         } else {
                             Log.e(TAG, " Response Error " + response.code());
@@ -140,5 +141,15 @@ public class FragmentUser extends Fragment {
                 });
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if ((requestCode == 10001) && (resultCode == Activity.RESULT_OK)){
+            // recreate your fragment here
+            ft = getFragmentManager().beginTransaction();
+            ft.detach(this).attach(this).commit();
+        }
     }
 }

@@ -16,7 +16,7 @@
         android:layout_margin="@dimen/_1sdp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:src="@raw/no_internet"
+        android:src="@raw/loading"
         tools:ignore="MissingConstraints" />
 
     <RelativeLayout

@@ -20,7 +20,7 @@ public interface NetworkAPI {
 
     @GET("api_update_user.php")
     Call<ServerResponse> updateUser(@Query("user") String user,
-                                    @Query("email") String pass,
+                                    @Query("email") String email,
                                     @Query("name") String name,
                                     @Query("date") String date);
 

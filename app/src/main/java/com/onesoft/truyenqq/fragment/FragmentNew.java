@@ -56,21 +56,6 @@ public class FragmentNew extends Fragment {
 
         ShowView(view);
 
-        //set onClick event for item
-//        rvManga.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),
-//                new RecyclerItemClickListener.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(View view, int position) {
-//                        Intent intent = new Intent(getContext(), DetailNewActivity.class);
-//                        intent.putParcelableArrayListExtra("data", list);
-//                        intent.putExtra("pos", position);
-//                        startActivity(intent);
-//                        getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
-//
-//                        Toast.makeText( getContext(),"name: "+modelMangaArrayList.get( position ).getName(),Toast.LENGTH_SHORT ).show();
-//                    }
-//                }));
-
         return view;
     }
 

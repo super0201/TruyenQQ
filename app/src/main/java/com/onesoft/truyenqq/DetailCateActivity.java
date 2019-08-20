@@ -35,7 +35,7 @@ public class DetailCateActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_new);
+        setContentView(R.layout.layout_detail_new);
 
         imvBack = findViewById(R.id.imvBack);
         imvCate = findViewById(R.id.imgManga_detail);
@@ -82,6 +82,7 @@ public class DetailCateActivity extends AppCompatActivity{
                         //good for app loading performance
                         .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                 .transition(withCrossFade())
+                .onlyRetrieveFromCache(true)
                 .into(imvCate);
 //        ImageFilter.applyFilter(bitmap, ImageFilter.Filter.GOTHAM);
     }

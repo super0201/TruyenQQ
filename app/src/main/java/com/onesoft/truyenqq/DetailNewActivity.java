@@ -2,6 +2,15 @@ package com.onesoft.truyenqq;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,25 +22,29 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import java.util.ArrayList;
 
 import model.ModelManga;
+import utils.ImageHelper;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 import static com.bumptech.glide.request.RequestOptions.centerCropTransform;
+import static com.bumptech.glide.request.RequestOptions.fitCenterTransform;
 
 public class DetailNewActivity extends AppCompatActivity {
-    ArrayList<ModelManga> mangases;
+    private ArrayList<ModelManga> mangases;
     ImageView ivManga_detail;
     TextView tvName_detail,tvCate_detail,tvDate_detail,tvDesc_detail;
-    Button imvBack;
+    ImageView imvBack;
 
     @SuppressLint({"ResourceType", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_detail_new );
+        setContentView( R.layout.layout_detail_new);
 
         ivManga_detail = findViewById( R.id.imgManga_detail );
         tvName_detail = findViewById( R.id.tvName_detail );
@@ -75,10 +88,9 @@ public class DetailNewActivity extends AppCompatActivity {
                         .priority(Priority.HIGH)
                         //using cache strategy for caching image on first time load
                         //good for app loading performance
-                        .diskCacheStrategy(DiskCacheStrategy.ALL))
+                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                 .transition(withCrossFade())
-                .thumbnail(0.1f)
+                .onlyRetrieveFromCache(true)
                 .into(ivManga_detail);
-
     }
 }

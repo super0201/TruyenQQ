@@ -12,15 +12,24 @@
         android:layout_height="@dimen/_30sdp"
         android:gravity="center"
         android:elevation="@dimen/_2sdp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:background="@color/colorPrimary"
         tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/imvBack"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_gravity="center"
+            android:src="@raw/arrows"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textAlignment="center"
-            android:layout_marginTop="@dimen/_1sdp"
+            android:gravity="center"
             android:textColor="@color/white"
             android:fontFamily="@font/uvn"
             android:textSize="@dimen/_15sdp"
@@ -43,17 +52,17 @@
 
         <ImageView
             android:id="@+id/imvThumb"
-            android:layout_width="@dimen/_60sdp"
-            android:layout_height="@dimen/_60sdp"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/_10sdp"
-            android:src="@raw/no_internet"/>
+            android:src="@raw/loading"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_53sdp"
+        android:layout_height="@dimen/_50sdp"
         android:layout_alignParentEnd="true"
         android:layout_marginLeft="@dimen/_3sdp"
         android:layout_marginTop="@dimen/_10sdp"
@@ -66,17 +75,17 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_4sdp"
+            android:layout_margin="@dimen/_5sdp"
             android:text="Username"
             android:fontFamily="@font/uvn"
-            android:textSize="@dimen/_9sdp"
+            android:textSize="@dimen/_8sdp"
             android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/tvUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginLeft="@dimen/_5sdp"
             android:fontFamily="@font/uvn"
             android:textColor="@color/white"
             android:textSize="@dimen/_14sdp"
@@ -87,7 +96,7 @@
     <LinearLayout
         android:outlineAmbientShadowColor="@color/backgroundSet"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_53sdp"
+        android:layout_height="@dimen/_50sdp"
         android:layout_marginTop="@dimen/_3sdp"
         android:layout_marginLeft="@dimen/_3sdp"
         android:layout_marginRight="@dimen/_3sdp"
@@ -119,7 +128,7 @@
     <LinearLayout
         android:outlineAmbientShadowColor="@color/backgroundSet"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_53sdp"
+        android:layout_height="@dimen/_50sdp"
         android:layout_marginTop="@dimen/_3sdp"
         android:layout_marginLeft="@dimen/_3sdp"
         android:layout_marginRight="@dimen/_3sdp"
@@ -147,80 +156,102 @@
 
     </LinearLayout>
 
+    <!--<LinearLayout-->
+        <!--android:outlineAmbientShadowColor="@color/backgroundSet"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/_53sdp"-->
+        <!--android:layout_marginTop="@dimen/_3sdp"-->
+        <!--android:layout_marginLeft="@dimen/_3sdp"-->
+        <!--android:layout_marginRight="@dimen/_3sdp"-->
+        <!--android:elevation="@dimen/_2sdp"-->
+        <!--android:background="@color/colorPrimary">-->
+
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_margin="@dimen/_3sdp"-->
+            <!--android:theme="@style/AppTheme.Dark">-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/etPassword"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="Email"-->
+                <!--android:fontFamily="@font/uvn"-->
+                <!--android:inputType="text"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textColorLink="@color/white"-->
+                <!--android:textColorHighlight="@color/white"-->
+                <!--android:textColorHint="@color/white"  />-->
+        <!--</android.support.design.widget.TextInputLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:outlineAmbientShadowColor="@color/backgroundSet"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/_53sdp"-->
+        <!--android:layout_marginTop="@dimen/_3sdp"-->
+        <!--android:layout_marginLeft="@dimen/_3sdp"-->
+        <!--android:layout_marginRight="@dimen/_3sdp"-->
+        <!--android:elevation="@dimen/_2sdp"-->
+        <!--android:background="@color/colorPrimary">-->
+
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_margin="@dimen/_3sdp"-->
+            <!--android:theme="@style/AppTheme.Dark">-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/etRePassword"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="Re-enter Password"-->
+                <!--android:fontFamily="@font/uvn"-->
+                <!--android:inputType="text"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textColorLink="@color/white"-->
+                <!--android:textColorHighlight="@color/white"-->
+                <!--android:textColorHint="@color/white"  />-->
+        <!--</android.support.design.widget.TextInputLayout>-->
+
+    <!--</LinearLayout>-->
+
     <LinearLayout
-        android:outlineAmbientShadowColor="@color/backgroundSet"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_53sdp"
-        android:layout_marginTop="@dimen/_3sdp"
-        android:layout_marginLeft="@dimen/_3sdp"
-        android:layout_marginRight="@dimen/_3sdp"
-        android:elevation="@dimen/_2sdp"
-        android:background="@color/colorPrimary">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_35sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:orientation="horizontal">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/_3sdp"
-            android:theme="@style/AppTheme.Dark">
+        <Button
+            android:id="@+id/btnUpdateUser"
+            android:background="@drawable/round_button"
+            android:layout_width="@dimen/_130sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:text="Update Profile"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            android:elevation="@dimen/_2sdp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"/>
 
-            <EditText
-                android:id="@+id/etPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Email"
-                android:fontFamily="@font/uvn"
-                android:inputType="text"
-                android:textColor="@color/white"
-                android:textColorLink="@color/white"
-                android:textColorHighlight="@color/white"
-                android:textColorHint="@color/white"  />
-        </android.support.design.widget.TextInputLayout>
-
+        <Button
+            android:id="@+id/btnUpdatePass"
+            android:background="@drawable/round_button"
+            android:layout_width="@dimen/_130sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginLeft="@dimen/_30sdp"
+            android:text="Update Password"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            android:elevation="@dimen/_2sdp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:outlineAmbientShadowColor="@color/backgroundSet"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_53sdp"
-        android:layout_marginTop="@dimen/_3sdp"
-        android:layout_marginLeft="@dimen/_3sdp"
-        android:layout_marginRight="@dimen/_3sdp"
-        android:elevation="@dimen/_2sdp"
-        android:background="@color/colorPrimary">
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/_3sdp"
-            android:theme="@style/AppTheme.Dark">
-
-            <EditText
-                android:id="@+id/etRePassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Re-enter Password"
-                android:fontFamily="@font/uvn"
-                android:inputType="text"
-                android:textColor="@color/white"
-                android:textColorLink="@color/white"
-                android:textColorHighlight="@color/white"
-                android:textColorHint="@color/white"  />
-        </android.support.design.widget.TextInputLayout>
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btnUpdate"
-        android:background="@drawable/round_button"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:text="Update Profile"
-        android:textSize="@dimen/_12sdp"
-        android:textStyle="bold"
-        android:elevation="@dimen/_2sdp"
-        android:textColor="@color/white"
-        android:layout_gravity="center"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

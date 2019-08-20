@@ -1,6 +1,7 @@
 package com.onesoft.truyenqq;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,7 @@ import java.util.Locale;
 
 import model.ServerResponse;
 import network.NetworkAPI;
+import network.ServiceAPI;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,8 +37,8 @@ import static com.bumptech.glide.request.RequestOptions.centerCropTransform;
 public class DetailUserActivity extends AppCompatActivity {
     private static final String TAG = "DetailUserActivity";
     private NetworkAPI api;
-    Button btnUpdate;
-    ImageView imvThumb;
+    Button btnUpdate, btnUpdate1;
+    ImageView imvThumb, imvBack;
     EditText email, name;
     TextView date, user;
     String user1, email1, name1, thumb1;
@@ -46,17 +48,39 @@ public class DetailUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_user_detail);
 
+        //create service for updateUser
+        api = ServiceAPI.userService(NetworkAPI.class);
+
         imvThumb = findViewById(R.id.imvThumb);
+        imvBack = findViewById(R.id.imvBack);
         user = findViewById(R.id.tvUser);
         email = findViewById(R.id.etMail);
         name = findViewById(R.id.etName);
         date = findViewById(R.id.tvDate);
-        btnUpdate = findViewById(R.id.btnUpdate);
+        btnUpdate = findViewById(R.id.btnUpdateUser);
+        btnUpdate1 = findViewById(R.id.btnUpdatePass);
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 doUpdate();
+            }
+        });
+
+        btnUpdate1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doUpdate();
+            }
+        });
+
+        imvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(Activity.RESULT_OK);
+                getFragmentManager().popBackStackImmediate();
+                finish();
+                overridePendingTransition(R.anim.push_left_out, R.anim.push_left_in);
             }
         });
 
@@ -88,7 +112,6 @@ public class DetailUserActivity extends AppCompatActivity {
                         .priority(Priority.HIGH)
                         .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                 .transition(withCrossFade())
-                .thumbnail(0.5f)
                 .onlyRetrieveFromCache(true)
                 .into(imvThumb);
     }
@@ -108,7 +131,7 @@ public class DetailUserActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                         Toast.makeText(getBaseContext(), response.message(), Toast.LENGTH_SHORT);
-                        if(response.body().getResult() == 1){
+                        if(response.isSuccessful()){
                             LayoutInflater inflater = getLayoutInflater();
                             View layout = inflater.inflate(R.layout.custom_toast,
                                     (ViewGroup) findViewById(R.id.custom_toast_container));
@@ -124,8 +147,7 @@ public class DetailUserActivity extends AppCompatActivity {
                             toast.setView(layout);
                             toast.show();
 
-                            Intent i = new Intent(getBaseContext(), LoginActivity.class);
-                            startActivity(i);
+                            setResult(Activity.RESULT_OK);
 
                         } else {
                             LayoutInflater inflater = getLayoutInflater();
@@ -143,10 +165,7 @@ public class DetailUserActivity extends AppCompatActivity {
                             toast.setView(layout);
                             toast.show();
 
-                            Intent i = new Intent(getBaseContext(), LoginActivity.class);
-                            startActivity(i);
-
-                            Log.e(TAG," Response Error "+ response.code());
+//                            Log.e(TAG," Response Error "+ response.code());
                         }
                     }
 
@@ -158,6 +177,14 @@ public class DetailUserActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setResult(Activity.RESULT_OK);
+        getFragmentManager().popBackStackImmediate();
+        finish();
+        overridePendingTransition(R.anim.push_left_out, R.anim.push_left_in);
     }
 }
