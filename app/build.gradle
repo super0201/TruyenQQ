@@ -42,7 +42,7 @@ dependencies {
     implementation 'io.github.kobakei:ratethisapp:1.2.0'
     implementation 'com.github.silvestrpredko:dot-progress-bar:1.1'
     implementation 'pub.devrel:easypermissions:2.0.0'
-//    implementation 'com.facebook.android:facebook-login:[5,6)'
+    implementation 'com.facebook.android:facebook-login:[5,6)'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

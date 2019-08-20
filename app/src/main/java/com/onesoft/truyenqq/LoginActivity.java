@@ -21,6 +21,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+
 import model.ServerResponse;
 import network.NetworkAPI;
 import network.ServiceAPI;
@@ -34,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin, btnSignUp;
     CheckBox ckbRemember;
     private NetworkAPI api;
+    CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +91,27 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //FB
+        callbackManager = CallbackManager.Factory.create();
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        // App code
+                        onLoginSuccess();
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        // App code
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        // App code
+                        onLoginFailed();
+                    }
+                });
     }
 
     public void login(){
@@ -112,6 +140,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     public void onLoginSuccess() {

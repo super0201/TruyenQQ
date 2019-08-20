@@ -20,6 +20,9 @@
     <string name="login_success">Vào rồi kìa, ghê hôn!</string>
     <string name="login_failed">Úi giời, login gì tầm này!</string>
 
+    <string name="facebook_app_id">2299966666724447</string>
+    <string name="fb_login_protocol_scheme">fb2299966666724447</string>
+
     //register
     <string name="reg_success">Chồi ôi, register được luôn kìa! Ghê hôn</string>
     <string name="reg_failed">Số bạn nhọ quá!</string>
