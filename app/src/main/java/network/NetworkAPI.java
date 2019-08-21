@@ -3,6 +3,7 @@ package network;
 import java.util.List;
 
 import model.ModelCategory;
+import model.ModelFav;
 import model.ModelListManga;
 import model.ModelSearch;
 import model.ServerResponse;
@@ -33,6 +34,14 @@ public interface NetworkAPI {
     @GET("api_update_pass.php")
     Call<ServerResponse> updatePass(@Query("user") String user,
                                     @Query("pass") String pass);
+
+    @GET("api_get_bookmark.php")
+    Call<List<ModelFav>> getBookmark(@Query("user") String user,
+                                     @Query("index") Integer index);
+
+    @GET("api_save_bookmark.php")
+    Call<ServerResponse> saveBookmark(@Query("user") String user,
+                                     @Query("bm") String bm);
 
     @GET("api_get_user.php")
     Call<ModelUser> getUser(@Query("user") String user);

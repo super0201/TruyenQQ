@@ -9,9 +9,6 @@ import android.os.Parcelable;
 public class ModelCategory implements Parcelable {
     private String name, thumb;
 
-    public ModelCategory(String name, String thumb) {
-    }
-
     public ModelCategory(Parcel in) {
         name = in.readString();
         thumb = in.readString();
@@ -28,6 +25,9 @@ public class ModelCategory implements Parcelable {
             return new ModelCategory[size];
         }
     };
+
+    public ModelCategory(String thumb, String category) {
+    }
 
     public String getName() {
         return name;

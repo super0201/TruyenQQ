@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_2sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="MissingDefaultResource">
+
+    <ImageView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/item_img1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_160sdp"
+        android:layout_margin="@dimen/_1sdp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginLeft="@dimen/_1sdp"
+            android:layout_marginRight="@dimen/_1sdp"
+            app:layout_constraintBottom_toBottomOf="@id/item_img1"
+            android:clickable="false"
+            android:gravity="center"
+            android:background="@color/black65">
+
+            <TextView
+                android:id="@+id/tvName1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:clickable="false"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:fontFamily="@font/uvn"
+                android:textAlignment="center"
+                android:maxLines="2"
+                android:textSize="@dimen/_13sdp"
+                android:text="@string/app_name"
+                android:textColor="@color/white"/>
+
+            <ImageView
+                android:id="@+id/unFavList"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_alignParentRight="true"
+                android:clickable="true"
+                android:elevation="@dimen/_1sdp"
+                android:src="@raw/heart_clicked"/>
+
+        </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
