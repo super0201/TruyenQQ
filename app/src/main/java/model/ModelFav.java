@@ -3,9 +3,7 @@ package model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created By JohnNguyen - Onesoft on 19/11/2018
- */
+
 public class ModelFav implements Parcelable {
     private String user, bookmark, thumb;
 

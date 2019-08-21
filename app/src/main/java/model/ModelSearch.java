@@ -5,9 +5,7 @@ import android.os.Parcelable;
 
 import java.util.Date;
 
-/**
- * Created By JohnNguyen - Onesoft on 05/12/2018
- */
+
 public class ModelSearch implements Parcelable {
     private int id;
     private String category, thumb, name, description, date_add;

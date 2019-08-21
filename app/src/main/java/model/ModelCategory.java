@@ -3,9 +3,7 @@ package model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created By JohnNguyen - Onesoft on 07/11/2018
- */
+
 public class ModelCategory implements Parcelable {
     private String name, thumb;
 
