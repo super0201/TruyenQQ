@@ -21,9 +21,7 @@ import model.ModelCategory;
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 import static com.bumptech.glide.request.RequestOptions.centerCropTransform;
 
-/**
- * Created By JohnNguyen - Onesoft on 07/11/2018
- */
+
 public class AdapterCategory extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public final int TYPE_MOVIE = 0;
     public final int TYPE_LOAD = 1;
