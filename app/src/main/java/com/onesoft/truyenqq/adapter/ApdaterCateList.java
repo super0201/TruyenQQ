@@ -22,9 +22,7 @@ import model.ModelSearch;
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 import static com.bumptech.glide.request.RequestOptions.centerCropTransform;
 
-/**
- * Created By JohnNguyen - Onesoft on 13/11/2018
- */
+
 public class ApdaterCateList extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public final int TYPE_DATA = 0;
     public final int TYPE_LOAD = 1;

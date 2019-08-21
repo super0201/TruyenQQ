@@ -20,9 +20,7 @@ import model.ModelSearch;
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 import static com.bumptech.glide.request.RequestOptions.centerCropTransform;
 
-/**
- * Created By JohnNguyen - Onesoft on 19/11/2018
- */
+
 public class DetailCateActivity extends AppCompatActivity{
     public ArrayList<ModelSearch> data = new ArrayList<>();
     int pos;

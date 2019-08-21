@@ -30,9 +30,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created By JohnNguyen - Onesoft on 04/11/2018
- */
 public class ActivityCateList extends AppCompatActivity {
     private ArrayList<ModelSearch> list;
     public ArrayList<ModelCategory> data = new ArrayList<>();
