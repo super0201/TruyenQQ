@@ -12,10 +12,10 @@ import static utils.Constants.URL_FOLDER;
 public class ServiceAPI {
 
     public static String GET_DATA_COMIC = ROOT_URL + URL_FOLDER ;
-    public static String BASE_URL = "https://mangahay.net/manga/";
-    public static String FOLDER_USER = "api_for_user/";
-    public static String FOLDER_CATE = "api_for_cate/";
-    public static String FOLDER_COMIC = "api_for_comic/";
+    public static String BASE_URL = "";
+    public static String FOLDER_USER = "";
+    public static String FOLDER_CATE = "";
+    public static String FOLDER_COMIC = "";
 
     public static <S> S userService(Class<S> serviceClass) {
 
